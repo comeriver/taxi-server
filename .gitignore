@@ -9,3 +9,5 @@ application/documents/public/2020/06/06/native-app-tar-gz.gz
 application/modules/NativeApp.php
 application/modules/NativeApp
 application/databases/NativeApp/Authenticate/table.xml
+application/databases/TaxiApp/booking.xml
+application/databases/Application/notification.xml

@@ -20,11 +20,18 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
 {
 	
     /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 0 );
+	
+    /**
      * 
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Add new'; 
+	protected static $_objectTitle = 'Book a taxi'; 
 
     /**
      * Performs the whole widget running process
@@ -35,30 +42,51 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Add new' );
-			$this->setViewContent( $this->getForm()->view() );
 
-		//	self::v( $_POST );
-			if( ! $values = $this->getForm()->getValues() ){ return false; }
-			
+
+            $this->createForm();
+            $this->setViewContent( $this->getForm()->view() );
+            
+            if( ! $values = $this->getForm()->getValues() )
+            {
+                NativeApp::populatePostData();
+
+                if( empty( $_POST['destination'] ) )
+                {
+                    $this->_objectData['badnews'] = "Invalid Destination";
+                    return false;
+                }
+                if( empty( $_POST['passenger_id'] ) )
+                {
+                    $this->_objectData['badnews'] = "Passenger is not logged in";
+                    return false;
+                }
+                if( ! is_array( $_POST['passenger_location'] ) )
+                {
+                //    $this->_objectData['badnews'] = "Pick up location not set";
+                //    return false;
+                }
+                $values = $_POST;
+    
+            }
+    
+            if( ! $bookingInfo = TaxiApp_Booking::getInstance()->insert( $values ) )
+            {
+                $this->_objectData['badnews'] = "We could not save the booking into the database";
+                return false;
+            }
+            $this->_objectData['goodnews'] = "Booking successful. Connecting...";
+            $this->_objectData += $bookingInfo;
+        
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = __CLASS__;
-			$mailInfo['body'] = 'Form submitted on your PageCarton Installation with the following information: "' . self::arrayToString( $values ) . '". 
-			
-			';
+			$mailInfo['body'] = 'A booking was just made with the following information: <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Booking Info</a>';
 			try
 			{
-		//		var_export( $mailInfo );
 				@Ayoola_Application_Notification::mail( $mailInfo );
 			}
 			catch( Ayoola_Exception $e ){ null; }
-		//	if( ! $this->insertDb() ){ return false; }
-			if( $this->insertDb( $values ) )
-			{ 
-				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
-			}
-		//	$this->setViewContent( $this->getForm()->view() );
             
 
 

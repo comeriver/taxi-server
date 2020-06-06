@@ -17,7 +17,7 @@
  */
 
 
-class TaxiApp_Booking_Abstract extends PageCarton_Widget
+class TaxiApp_Booking_Abstract extends TaxiApp
 {
 	
     /**

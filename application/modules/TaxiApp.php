@@ -16,7 +16,7 @@
  * @see PageCarton_Widget
  */
 
-class TaxiApp extends PageCarton_Widget
+class TaxiApp extends NativeApp
 {
 	
     /**

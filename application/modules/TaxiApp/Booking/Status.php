@@ -42,9 +42,32 @@ class TaxiApp_Booking_Status extends TaxiApp_Booking_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
+            
+            if( ! $values = $this->getForm()->getValues() )
+            {
+                //    NativeApp::populatePostData();
+                if( empty( $_GET['booking_id'] ) )
+                {
+                    $this->_objectData['badnews'] = "Booking ID not set";
+                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>' ); 
+                    return false;
+                }    
+            }
+            $where = array(
+                'booking_id' => $_GET['booking_id']
+            );
+        //    var_export( $where );
+            if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
+            {
+                $this->_objectData['badnews'] = "We could not retrieve the booking from the database";
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>' ); 
+                return false;
+            }
+            $this->_objectData['goodnews'] = self::$_statusMeaning[$bookingInfo['status']];
+            $this->_objectData += $bookingInfo;
 
             // end of widget process
-          
+            $this->setViewContent( '<p class="goodnews">' . $this->_objectData['goodnews'] . '</p>' ); 
 		}  
 		catch( Exception $e )
         { 

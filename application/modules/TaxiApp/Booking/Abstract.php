@@ -44,9 +44,25 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * Access level for player. Defaults to everyone
      *
-     * @var boolean
+     * @var array
      */
 	protected static $_accessLevel = array( 99, 98 );
+	
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var array
+     */
+	protected static $_statusMeaning = array( 
+        -2 => 'Trip canceled by passenger',
+        -1 => 'Trip canceled by rider operator',
+        0 => 'Passenger requested a ride',
+        1 => 'Passenger was matched with a ride',
+        2 => 'Ride arrived at passenger location',
+        3 => 'Trip started',
+        4 => 'Trip completed',
+        5 => 'Passenger paid for ride',
+     );
 
 
     /**

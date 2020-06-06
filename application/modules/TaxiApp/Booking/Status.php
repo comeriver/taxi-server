@@ -20,6 +20,13 @@ class TaxiApp_Booking_Status extends TaxiApp_Booking_Abstract
 {
 	
     /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected static $_accessLevel = array( 0 );
+	
+    /**
      * 
      * 
      * @var string 

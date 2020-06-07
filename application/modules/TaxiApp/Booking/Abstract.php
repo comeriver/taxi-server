@@ -55,7 +55,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      */
 	protected static $_statusMeaning = array( 
         -2 => 'Trip canceled by passenger',
-        -1 => 'Trip canceled by rider operator',
+        -1 => 'Trip canceled by ride operator',
         0 => 'Passenger requested a ride',
         1 => 'Passenger was matched with a ride',
         2 => 'Ride arrived at passenger location',

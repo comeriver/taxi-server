@@ -56,7 +56,6 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
             $where = array(
                 'booking_id' => $_GET['booking_id']
             );
-        //    var_export( $where );
             if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
             {
                 $this->_objectData['badnews'] = "We could not retrieve the booking from the database";

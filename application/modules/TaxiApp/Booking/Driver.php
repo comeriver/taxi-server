@@ -93,6 +93,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
                 $update['status'] = $_POST['status'];
                 $update['driver_id'] = $_POST['driver_id'];
                 $update['driver_location'] = $_POST['driver_location'];
+                $update['status_info'] = $bookingInfo['status_info'];
                 $update['status_info'][$update['status']]['time'] = time();
                 $update['last_status_time'] = time();
 

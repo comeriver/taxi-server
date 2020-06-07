@@ -42,7 +42,14 @@ class TaxiApp_Booking_Cancel extends TaxiApp_Booking_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
+            NativeApp::populatePostData();
+            $result1 = self::cancelDriverBookings();
+            $result2 = self::cancelPassengerBookings();
 
+            $this->_objectData['goodnews'] = 'All bookings by user has been canceled.';
+            $this->_objectData['debug']['post'] = $_POST;
+            $this->_objectData['debug']['driver'] = $result1;
+            $this->_objectData['debug']['passenger'] = $result2;
             // end of widget process
           
 		}  

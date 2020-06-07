@@ -72,7 +72,8 @@ class TaxiApp_Login extends TaxiApp
                     'username' => '_' . $phone,
                     'password' => Ayoola_Form::hashElementName( $email . $phone ),
                 );
-                $signup = new Application_User_Creator( $signupParameters );
+                $signup = new Application_User_Creator( array( 'fake_values' => $signupParameters ) );
+                $signup->view();
                 if( ! $userInfo = Application_User_Abstract::getUserInfo( $login ) )
                 {
                     if( $signup->getForm()->getBadnews() )

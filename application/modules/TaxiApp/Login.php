@@ -87,6 +87,15 @@ class TaxiApp_Login extends TaxiApp
                 }
             }
 
+            if( TaxiApp_Settings::retrieve( "driver_user_group" ) && $userInfo['access_level'] == TaxiApp_Settings::retrieve( "driver_user_group" ) )
+            {
+                $userInfo['can_drive'] = true;
+            }
+            elseif( TaxiApp_Settings::retrieve( "driver_user_group" ) )
+            {
+                $userInfo['can_drive'] = false;
+            }
+
             $authInfo = array();
             $authToken = md5( uniqid( json_encode( $userInfo ), true ) );
 

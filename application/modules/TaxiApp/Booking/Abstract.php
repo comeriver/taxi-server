@@ -64,6 +64,29 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         5 => 'Passenger paid for ride',
      );
 
+    /**
+     * 
+     */
+	protected static function cancelDriverBookings( array $identifier = null )  
+    {
+        if( empty( $identifier ) )
+        {
+            $identifier = $_POST;
+        }
+        return TaxiApp_Booking::getInstance()->update( array( 'status' => -1 ), array( 'driver_id' => $identifier['driver_id'], 'status' => array( 0, 1, 2, 3 ) ) );
+    }
+
+    /**
+     * 
+     */
+	protected static function cancelPassengerBookings( array $identifier = null )  
+    {
+        if( empty( $identifier ) )
+        {
+            $identifier = $_POST;
+        }
+        return TaxiApp_Booking::getInstance()->update( array( 'status' => -2 ), array( 'passenger_id' => $identifier['passenger_id'], 'status' => array( 0, 1, 2, 3 ) ) );
+    }
 
     /**
      * creates the form for creating and editing page

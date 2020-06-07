@@ -46,31 +46,28 @@ class TaxiApp_Settings extends PageCarton_Settings
 				$settings = $values;
 			}
 		}
-	//	$settings = unserialize( @$values['settings'] ) ? : $values['settings'];
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
 		$fieldset = new Ayoola_Form_Element;
 
-
-
         //  Sample Text Field Retrieving E-mail Address
-		$fieldset->addElement( array( 'name' => 'email_address', 'label' => 'E-mail Address', 'value' => @$settings['email_address'], 'type' => 'InputText' ) );
-
+		$fieldset->addElement( array( 'name' => 'time_rate', 'label' => 'Rate per second', 'value' => @$settings['time_rate'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'distance_rate', 'label' => 'Rate per km', 'value' => @$settings['distance_rate'], 'type' => 'InputText' ) );
 
         //  Check box
-		$options = array( 
-							'option_value1' => 'Option 1', 
-							'option_value2' => 'Option 2', 
-							);
-		$fieldset->addElement( array( 'name' => 'other_options', 'label' => 'Other Options', 'value' => @$settings['other_options'], 'type' => 'Checkbox' ), $options );
+		$authLevel = new Ayoola_Access_AuthLevel;
+		$authLevel = $authLevel->select();
+		require_once 'Ayoola/Filter/SelectListArray.php';
+		$filter = new Ayoola_Filter_SelectListArray( 'auth_level', 'auth_name');
+		$authLevel = $filter->filter( $authLevel );
+
+        $fieldset->addElement( array( 'name' => 'driver_user_group', 'label' => 'What user-group can act as driver', 'value' => @$settings['driver_user_group'], 'type' => 'Select' ), $authLevel );
 		
-		$fieldset->addLegend( 'Sample Plugin Settings' ); 
+		$fieldset->addLegend( 'TaxiApp Plugin Settings' ); 
                
 		$form->addFieldset( $fieldset );
 		$this->setForm( $form );
-		//		$form->addFieldset( $fieldset );
-	//	$this->setForm( $form );
     } 
 	// END OF CLASS
 }

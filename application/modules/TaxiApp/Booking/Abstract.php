@@ -79,6 +79,19 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * 
      */
+	protected static function calcRate( $bookingInfo )  
+    {
+        $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
+        $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
+        $distanceRate = TaxiApp_Settings::retrieve( "distance_rate" ) * $routeInfo['distance']['value'];
+
+        $totalRate = $timeRate + $distanceRate;
+        return $totalRate;
+    }
+
+    /**
+     * 
+     */
 	protected static function cancelPassengerBookings( array $identifier = null )  
     {
         if( empty( $identifier ) )

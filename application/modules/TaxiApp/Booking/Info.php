@@ -72,13 +72,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
 
             $this->setViewContent( '<h2 style="' . $titleCss . '">Trip Overview</h2>' ); 
 
-            
-
-            $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
-            $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
-            $distanceRate = TaxiApp_Settings::retrieve( "distance_rate" ) * $routeInfo['distance']['value'];
-
-            $totalRate = $timeRate + $distanceRate;
+            $totalRate = self::calcRate( $bookingInfo );
 
             $overview = '
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Booking ID:</span> ' . $bookingInfo['booking_id'] . '</div>
@@ -98,7 +92,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                     <a class="pc-btn" target="" href="tel://' . $driverInfo['phone_number'] . '">Call driver</a>
                     <a class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=${passengerLocation.latitude},${passengerLocation.longitude};">Get Directions</a>
                     <a class="pc-btn" target="" href="tel://' . $passengerInfo['phone_number'] . '">Call passenger</a>
-                    <a class="pc-btn" target="" href="/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment</a>
+                    <a class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment</a>
                 </div>
             ' ); 
 

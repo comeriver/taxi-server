@@ -43,9 +43,7 @@ class TaxiApp extends NativeApp
 		{ 
             //  Code that runs the widget goes here...
 
-            //  Output demo content to screen
-
-             // end of widget process
+            // end of widget process
           
 		}  
 		catch( Exception $e )

@@ -89,9 +89,9 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             //  Links
             $this->setViewContent( '
                 <div style="' . $titleCss . '"> 
-                    <a class="pc-btn" target="" href="tel://' . $driverInfo['phone_number'] . '">Call driver</a>
+                    <a class="pc-btn" target="" href="tel:' . $driverInfo['phone_number'] . '">Call driver</a>
                     <a class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=${passengerLocation.latitude},${passengerLocation.longitude};">Get Directions</a>
-                    <a class="pc-btn" target="" href="tel://' . $passengerInfo['phone_number'] . '">Call passenger</a>
+                    <a class="pc-btn" target="" href="tel:' . $passengerInfo['phone_number'] . '">Call passenger</a>
                     <a class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment</a>
                 </div>
             ' ); 

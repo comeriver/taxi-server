@@ -25,7 +25,7 @@ class TaxiApp_Booking extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.4';  
+    protected $_tableVersion = '0.5';  
 
     /**
      * Table data types and declaration
@@ -37,6 +37,7 @@ class TaxiApp_Booking extends PageCarton_Table
         'destination' => 'INPUTTEXT',
         'driver_id' => 'INPUTTEXT',
         'passenger_id' => 'INPUTTEXT',
+        'notes' => 'INPUTTEXT',
         'route_info' => 'JSON',
         'driver_location' => 'JSON',
         'passenger_location' => 'JSON',

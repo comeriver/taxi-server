@@ -18,6 +18,13 @@
 
 class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
 {
+			
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected $_playMode = self::PLAY_MODE_HTML;
 	
     /**
      * Access level for player. Defaults to everyone
@@ -31,7 +38,7 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = ''; 
+	protected static $_objectTitle = 'Make payment'; 
 
     /**
      * Performs the whole widget running process
@@ -48,7 +55,7 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
                 //    NativeApp::populatePostData();
                 if( empty( $_GET['booking_id'] ) )
                 {
-                    $this->_objectData['badnews'] = "Booking ID not set";
+                    $this->_objectData['badnews'] = 'Booking ID for the '  . self::getTerm( 'Trip' ) . ' is not set. Please check the URL and try again.';
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>' ); 
                     return false;
                 }    
@@ -58,7 +65,7 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
             );
             if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
             {
-                $this->_objectData['badnews'] = "We could not retrieve the booking from the database";
+                $this->_objectData['badnews'] = "We could not retrieve the booking from the database.";
                 $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>' ); 
                 return false;
             }

@@ -24,7 +24,7 @@ class Places_Route extends Places
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 0 );
+	protected static $_accessLevel = array( 1 );
 	
     /**
      * 

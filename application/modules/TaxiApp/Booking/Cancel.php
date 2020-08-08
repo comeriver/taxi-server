@@ -24,7 +24,7 @@ class TaxiApp_Booking_Cancel extends TaxiApp_Booking_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 0 );
+	protected static $_accessLevel = array( 1 );
 	
     /**
      * 

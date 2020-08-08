@@ -24,7 +24,7 @@ class Places_Details extends Places
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 0 );
+	protected static $_accessLevel = array( 1 );
 	
     /**
      * 
@@ -65,13 +65,14 @@ class Places_Details extends Places
                 }
                 $info['name'] = $response['result']['name'];
                 $info['address'] = $response['result']['formatted_address'];
-                $info['long'] = $response['result']['geometry']['location']['lng'];
-                $info['lat'] = $response['result']['geometry']['location']['lat'];
+                $info['longitude'] = $response['result']['geometry']['location']['lng'];
+                $info['latitude'] = $response['result']['geometry']['location']['lat'];
                 $info['place_id'] = $response['result']['place_id'];
                 $info['type'] = $response['result']['types'];
                 Places_Table::getInstance()->insert( $info );    
             }
             $this->_objectData = $info;
+        //    var_export( $this->_objectData );
             // end of widget process
           
 		}  

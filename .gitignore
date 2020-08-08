@@ -12,3 +12,5 @@ application/databases/NativeApp/Authenticate/table.xml
 application/databases/TaxiApp/booking.xml
 application/databases/Application/notification.xml
 application/databases/Ayoola/Access/localuser.xml
+application/databases/Places/table.xml
+application/databases/Application/settings.xml

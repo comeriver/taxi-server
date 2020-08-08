@@ -59,6 +59,13 @@ class Places_Route extends Places
             $response = self::fetchLink( $apiUrl, array( 'time_out' => 60, 'connect_time_out' => 60 ) );
         //    var_export( $response );
             $response = json_decode( $response, true );
+            if( empty( $response['routes'][0]['legs'][0] ) )
+            {
+                $this->_objectData['badnews'] = "Route to destination could not be calculated";
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
             $this->_objectData = $response;
             // end of widget process
           

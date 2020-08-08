@@ -48,7 +48,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
 
                 if( empty( $_POST['driver_id'] ) )
                 {
-                    $this->_objectData['badnews'] = "Driver ID is not provided";
+                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Driver' ) . ' ID is not provided';
                     return false;
                 }
                 if( ! is_array( $_POST['driver_location'] ) )
@@ -76,7 +76,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
 
             if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
             {
-                $this->_objectData['goodnews'] = "No passenger online";
+                $this->_objectData['goodnews'] = 'No '  . self::getTerm( 'Passenger' ) . ' online';
                 //    $this->_objectData['badnews'] = "Booking not found in the the database";
                 $this->_objectData['debug'] = $_POST;
                 $this->_objectData['debug'] = $where;

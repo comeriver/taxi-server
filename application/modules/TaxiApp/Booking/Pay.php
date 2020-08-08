@@ -67,7 +67,7 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
 
             $class = new Application_Subscription();   
             $values['subscription_name'] = __CLASS__;
-            $values['subscription_label'] = 'Payment for Trip - ' . $_GET['booking_id'];
+            $values['subscription_label'] = 'Payment for '  . self::getTerm( 'Trip' ) . ' - ' . $_GET['booking_id'];
             
             $values['price'] = str_replace( array( ',', ' ' ), '', $totalRate );
 

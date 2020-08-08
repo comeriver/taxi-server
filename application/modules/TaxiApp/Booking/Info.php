@@ -18,6 +18,13 @@
 
 class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
 {
+			
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected $_playMode = self::PLAY_MODE_HTML;
 	
     /**
      * Access level for player. Defaults to everyone
@@ -85,12 +92,12 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Duration:</span> ' . $routeInfo['duration']['text'] . '</div>
             ';
             $this->setViewContent( '<div style="' . $flexContainer . '">' . $overview . '</div>' ); 
-
+        //    var_export( $bookingInfo );
             //  Links
             $this->setViewContent( '
                 <div style="' . $titleCss . '"> 
                     <a class="pc-btn" target="" href="tel:' . $driverInfo['phone_number'] . '">Call driver</a>
-                    <a class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=${passengerLocation.latitude},${passengerLocation.longitude};">Get Directions</a>
+                    <a class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $bookingInfo['passenger_location']['lat'] . ',' . $bookingInfo['passenger_location']['long'] . '">Get Directions</a>
                     <a class="pc-btn" target="" href="tel:' . $passengerInfo['phone_number'] . '">Call passenger</a>
                     <a class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment</a>
                 </div>

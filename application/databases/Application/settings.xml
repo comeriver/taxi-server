@@ -2,18 +2,18 @@
 <DOCUMENT_ELEMENT table_name="settings" creation_time="1591533919" modified_time="1591533919" table_version="0.0.7" module_version="1.00" table_class="Application_Settings" creation_ip="0">
   <RECORDS autoId="2">
     <TABLE_ROW ROW_ID="1">
-      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:3:{s:9:&quot;time_rate&quot;;s:1:&quot;2&quot;;s:13:&quot;distance_rate&quot;;s:1:&quot;5&quot;;s:17:&quot;driver_user_group&quot;;s:1:&quot;1&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;time_rate&quot;:&quot;2&quot;,&quot;distance_rate&quot;:&quot;5&quot;,&quot;driver_user_group&quot;:&quot;1&quot;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_name"><![CDATA[taxiapp]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="class_name"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settingsname_id"><![CDATA[0]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="settings_id"><![CDATA[1591533919-0-1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="creation_time"><![CDATA[1591533919]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:6:{s:9:&quot;time_rate&quot;;s:1:&quot;2&quot;;s:13:&quot;distance_rate&quot;;s:1:&quot;5&quot;;s:14:&quot;google_api_key&quot;;s:39:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;;s:21:&quot;default_location_long&quot;;s:6:&quot;4.5418&quot;;s:20:&quot;default_location_lat&quot;;s:6:&quot;7.7827&quot;;s:17:&quot;driver_user_group&quot;;s:1:&quot;1&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;time_rate&quot;:&quot;2&quot;,&quot;distance_rate&quot;:&quot;5&quot;,&quot;google_api_key&quot;:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;,&quot;default_location_long&quot;:&quot;4.5418&quot;,&quot;default_location_lat&quot;:&quot;7.7827&quot;,&quot;driver_user_group&quot;:&quot;1&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1596844569]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>

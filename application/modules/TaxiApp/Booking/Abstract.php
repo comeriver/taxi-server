@@ -112,12 +112,34 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     {
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
-		$form->submitValue = $submitValue ;
-//		$form->oneFieldSetAtATime = true;
+		$form->submitValue =  'Request Pickup';
 
-		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'destination', 'type' => 'InputText', 'value' => @$values['destination'] ) ); 
+        $fieldset = new Ayoola_Form_Element;
+        $widgets = Ayoola_Object_Embed::getWidgets();
+        if( empty( $widgets[@$values['class_name']] ) )
+        {
+            $widgets[@$values['class_name']] = $values['class_name'];
+        }
+
+        $fieldset->addElement( array( 'name' => 'pickup_place_id', 'label' => 'Set Pick-up Location', 'config' => array( 
+            'ajax' => array( 
+                'url' => '/taxi/widgets/Places',
+                'delay' => 1000
+            ),
+            'placeholder' => 'e.g. 2 Adekanbi St, Ikeja',
+            'minimumInputLength' => 1,
+        ), 'type' => 'Select2', 'value' => @$values['pickup_place_id'] ) ); 
+        $fieldset->addElement( array( 'name' => 'destination_place_id', 'label' => 'Set Destination', 'config' => array( 
+            'ajax' => array( 
+                'url' => '/taxi/widgets/Places',
+                'delay' => 1000
+            ),
+            'placeholder' => 'e.g. Palms Mall, Ibadan',
+            'minimumInputLength' => 1,
+        ), 'type' => 'Select2', 'value' => @$values['destination_place_id'] ) ); 
+        $fieldset->addRequirements( array( 'NotEmpty' => null ) );
+
+        $fieldset->addElement( array( 'name' => 'notes', 'type' => 'TextArea', 'placeholder' => 'Enter any further details here...', 'value' => @$values['notes'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

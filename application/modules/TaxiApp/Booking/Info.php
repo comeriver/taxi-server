@@ -38,7 +38,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = ''; 
+	protected static $_objectTitle = 'Booking Info'; 
 
     /**
      * Performs the whole widget running process
@@ -59,7 +59,6 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             $where = array(
                 'booking_id' => $_GET['booking_id']
             );
-        //    var_export( $where );
             if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
             {
                 $this->_objectData['badnews'] = "We could not retrieve the booking from the database";
@@ -67,16 +66,15 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                 return false;
             }
 
-            $titleCss = 'margin: 1em 0;';
+            $titleCss = 'margin: 1em 0; display:flex;';
             $smallTitleCss = 'display:block; font-size:small; font-weight:bold;margin-bottom:1em;';
             $flexContainer = 'display:flex; justify-content:space-between;flex-wrap:wrap;';
             $boxCss = 'border-bottom: 0.1px solid #ccc; margin: 0.2em 0;padding:1em;min-width:150px;width:25%;';
             $boxCss2 = 'border: 0.2px solid #ccc; margin: 0.2em 0;padding:1em;flex-basis:45%;';
             $smallText = 'font-size:small; font-weight:light;margin: 0 0.4em;';
 
-
             //  overview
-
+            $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
             $this->setViewContent( '<h2 style="' . $titleCss . '">Trip Overview</h2>' ); 
 
             $totalRate = self::calcRate( $bookingInfo );
@@ -92,14 +90,13 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Duration:</span> ' . $routeInfo['duration']['text'] . '</div>
             ';
             $this->setViewContent( '<div style="' . $flexContainer . '">' . $overview . '</div>' ); 
-        //    var_export( $bookingInfo );
+            //    var_export( $routeInfo );
             //  Links
             $this->setViewContent( '
                 <div style="' . $titleCss . '"> 
-                    <a class="pc-btn" target="" href="tel:' . $driverInfo['phone_number'] . '">Call driver</a>
-                    <a class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $bookingInfo['passenger_location']['lat'] . ',' . $bookingInfo['passenger_location']['long'] . '">Get Directions</a>
-                    <a class="pc-btn" target="" href="tel:' . $passengerInfo['phone_number'] . '">Call passenger</a>
-                    <a class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment</a>
+                    <a style="flex-basis:100%" class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $bookingInfo['passenger_location']['lat'] . ',' . $bookingInfo['passenger_location']['long'] . '">Get Direction to Pick-up Point <i class="fa fa-map-o fa-map" style="margin: 1em;"> </i></a>
+                    <a style="flex-basis:100%" class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $routeInfo['end_location']['lat'] . ',' . $routeInfo['end_location']['lng'] . '">Get Direction to Destination <i class="fa fa-map-marker" style="margin: 1em;"> </i></a>
+                    <a style="flex-basis:100%" class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment <i class="fa fa-money" style="margin: 1em;"> </i></a>
                 </div>
             ' ); 
 
@@ -147,12 +144,12 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                 <div style="' . $boxCss2 . '"><span style="' . $smallTitleCss . '">
                 ' . trim( $passengerInfo['firstname'] . ' ' . $passengerInfo['lastname'] ) . ' (Passenger):</span> 
                     <a href="mailto:' . $passengerInfo['email'] . '">' . $passengerInfo['email'] . '</a><br>
-                    <a href="tel://' . $passengerInfo['phone_number'] . '">' . $passengerInfo['phone_number'] . '</a><br>
+                    <a href="tel:' . $passengerInfo['phone_number'] . '">' . $passengerInfo['phone_number'] . '</a><br>
                 </div>
                 <div style="' . $boxCss2 . '"><span style="' . $smallTitleCss . '">
                 ' . trim( $driverInfo['firstname'] . ' ' . $driverInfo['lastname'] ) . ' (Driver):</span> 
                     <a href="mailto:' . $driverInfo['email'] . '">' . $driverInfo['email'] . '</a><br>
-                    <a href="tel://' . $driverInfo['phone_number'] . '">' . $driverInfo['phone_number'] . '</a><br>
+                    <a href="tel:' . $driverInfo['phone_number'] . '">' . $driverInfo['phone_number'] . '</a><br>
                 </div>
             ';
             $this->setViewContent( '<div style="' . $flexContainer . '">' . $people . '</div>' ); 

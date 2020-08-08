@@ -89,6 +89,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                     return false;
                 }
                 $values['destination_location'] = $placeInfo;
+                $values['destination'] = $placeInfo['name'] ? : $placeInfo['address'];
             }
 
             if( empty( $values['route_info'] ) )
@@ -114,7 +115,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             $this->_objectData += $bookingInfo;
 
             $this->setViewContent( '<h2 class="goodnews">Booking Confirmed</h2>', true );
-            $this->setViewContent( '<p>' . $this->_objectData['goodnews'] . ' <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></p>' );
+            $this->setViewContent( '<p style="margin:1em 0;">' . $this->_objectData['goodnews'] . ' <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></p>' );
         
 			//	Notify Admin
 			$mailInfo = array();

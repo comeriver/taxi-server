@@ -42,8 +42,6 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-
-
             $this->createForm();
             $this->setViewContent( $this->getForm()->view() );
             

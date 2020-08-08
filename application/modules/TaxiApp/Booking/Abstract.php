@@ -146,7 +146,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         ), 'type' => 'Select2', 'value' => @$values['destination_place_id'] ) ); 
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
-        $fieldset->addElement( array( 'name' => 'notes', 'type' => 'TextArea', 'placeholder' => 'Enter any further details here...', 'value' => @$values['notes'] ) ); 
+        $fieldset->addElement( array( 'name' => 'notes', 'type' => 'TextArea', 'placeholder' => 'Enter any further '  . self::getTerm( 'Trip' ) . ' or contact details here... (Optional)', 'value' => @$values['notes'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

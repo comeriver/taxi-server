@@ -94,7 +94,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             //  Links
             $this->setViewContent( '
                 <div style="' . $titleCss . '"> 
-                    <a style="flex-basis:100%" class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $bookingInfo['passenger_location']['lat'] . ',' . $bookingInfo['passenger_location']['long'] . '">Get Direction to Pick-up Point <i class="fa fa-map-o fa-map" style="margin: 1em;"> </i></a>
+                    <a style="flex-basis:100%" class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $bookingInfo['passenger_location']['latitude'] . ',' . $bookingInfo['passenger_location']['longitude'] . '">Get Direction to Pick-up Point <i class="fa fa-map-o fa-map" style="margin: 1em;"> </i></a>
                     <a style="flex-basis:100%" class="pc-btn" target="_blank" href="https://www.google.com/maps/dir/api=1&destination=' . $routeInfo['end_location']['lat'] . ',' . $routeInfo['end_location']['lng'] . '">Get Direction to Destination <i class="fa fa-map-marker" style="margin: 1em;"> </i></a>
                     <a style="flex-basis:100%" class="pc-btn" target="" href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay?booking_id=' . $bookingInfo['booking_id'] . '">Make Payment <i class="fa fa-money" style="margin: 1em;"> </i></a>
                 </div>

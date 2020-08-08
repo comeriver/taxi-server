@@ -56,7 +56,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             {
                 if( empty( $values['pickup_place_id'] ) )
                 {
-                    $this->_objectData['badnews'] = 'Pick up location is required';
+                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick up location is required';
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                     $this->setViewContent( $this->getForm()->view() );
                     return false;
@@ -64,7 +64,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
 
                 if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['pickup_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
                 {
-                    $this->_objectData['badnews'] = 'Invalid Pick-up Location. ' . @$placeInfo['badnews'];
+                    $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Passenger' ) . ' Pick-up Location. ' . @$placeInfo['badnews'];
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                     $this->setViewContent( $this->getForm()->view() );
                     return false;
@@ -76,14 +76,14 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             {
                 if( empty( $values['destination_place_id'] ) )
                 {
-                    $this->_objectData['badnews'] = 'Destination is required';
+                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Trip' ) . ' destination is required';
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                     $this->setViewContent( $this->getForm()->view() );
                     return false;
                 }
                 if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['destination_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
                 {
-                    $this->_objectData['badnews'] = 'Invalid Destination. ' . @$placeInfo['badnews'];
+                    $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Trip' ) . ' Destination. ' . @$placeInfo['badnews'];
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                     $this->setViewContent( $this->getForm()->view() );
                     return false;
@@ -96,7 +96,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             {
                 if( ! $routeInfo = Places_Route::viewInLine( array( 'destination' => 'place_id:' . $values['destination_location']['place_id'], 'origin' => 'place_id:' . $values['passenger_location']['place_id'], 'return_object_data' => true ) ) OR ! empty( $routeInfo['badnews'] ) )
                 {
-                    $this->_objectData['badnews'] = 'No route found from pick-up location to destination. Please change either the pick-up or destination location and try again. ' . @$placeInfo['badnews'];
+                    $this->_objectData['badnews'] = 'No route found from '  . self::getTerm( 'Passenger' ) . ' pick-up location to '  . self::getTerm( 'Trip' ) . ' destination. Please change either the pick-up or destination location and try again. ' . @$placeInfo['badnews'];
                     $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                     $this->setViewContent( $this->getForm()->view() );
                     return false;
@@ -111,7 +111,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                 $this->setViewContent( $this->getForm()->view() );
                 return false;
             }
-            $this->_objectData['goodnews'] = "Pick-up booking successful. Connecting in a moment...";
+            $this->_objectData['goodnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick-up booking successful. Connecting '  . self::getTerm( 'Trip' ) . ' in a moment...';
             $this->_objectData += $bookingInfo;
 
             $this->setViewContent( '<h2 class="goodnews">Booking Confirmed</h2>', true );
@@ -120,9 +120,9 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = 'Pick-up booking confirmation';
-            $mailInfo['body'] = 'A booking for a pick-up was just made. This is a confirmation of that booking. 
+            $mailInfo['body'] = ''  . self::getTerm( 'Passenger' ) . ' booking for a '  . self::getTerm( 'Trip' ) . ' was just made and a pick-up location was set successfully. This is a confirmation of that booking. 
             
-            <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a>';
+            <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Track '  . self::getTerm( 'Trip' ) . ' Booking Info</a>';
 			try
 			{
 				@Ayoola_Application_Notification::mail( $mailInfo );
@@ -130,8 +130,11 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             catch( Ayoola_Exception $e ){ null; }
             
             //  send mail to the current user
-            $mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
-            self::sendMail( $mailInfo );
+            if( Ayoola_Application::getUserInfo( 'email' ) )
+            {
+                $mailInfo['to'] = Ayoola_Application::getUserInfo( 'email' );
+                self::sendMail( $mailInfo );
+            }
             // end of widget process
           
 		}  

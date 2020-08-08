@@ -31,7 +31,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
      *
      * @var boolean
      */
-	protected static $_accessLevel = array( 0 );
+	protected static $_accessLevel = array( 1 );
 
     /**
      * Performs the whole widget running process

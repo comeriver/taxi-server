@@ -42,7 +42,6 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-            
             if( ! $values = $this->getForm()->getValues() )
             {
                 NativeApp::populatePostData();

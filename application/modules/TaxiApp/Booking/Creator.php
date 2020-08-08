@@ -49,8 +49,13 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
             
             if( ! $values = $this->getForm()->getValues() )
             {
+
                 NativeApp::populatePostData();
 
+                if( empty( $_POST ) )
+                {
+                    return false;
+                }
                 if( empty( $_POST['destination'] ) )
                 {
                     $this->_objectData['badnews'] = "Invalid Destination";
@@ -75,8 +80,10 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
                 $this->_objectData['badnews'] = "We could not save the booking into the database";
                 return false;
             }
-            $this->_objectData['goodnews'] = "Booking successful. Connecting...";
+            $this->_objectData['goodnews'] = "Booking successful. Please wait...";
             $this->_objectData += $bookingInfo;
+
+            $this->setViewContent( '<p class="goodnews">' . $this->_objectData['goodnews'] . '</p>', true );
         
 			//	Notify Admin
 			$mailInfo = array();

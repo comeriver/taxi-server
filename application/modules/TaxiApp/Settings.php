@@ -54,6 +54,9 @@ class TaxiApp_Settings extends PageCarton_Settings
         //  Sample Text Field Retrieving E-mail Address
 		$fieldset->addElement( array( 'name' => 'time_rate', 'label' => 'Rate per second', 'value' => @$settings['time_rate'], 'type' => 'InputText' ) );
 		$fieldset->addElement( array( 'name' => 'distance_rate', 'label' => 'Rate per km', 'value' => @$settings['distance_rate'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'google_api_key', 'label' => 'Google API Key', 'value' => @$settings['google_api_key'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'default_location_long', 'label' => 'Default Location Longitude', 'value' => @$settings['default_location_long'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'default_location_lat', 'label' => 'Default Location Latitude', 'value' => @$settings['default_location_lat'], 'type' => 'InputText' ) );
 
         //  Check box
 		$authLevel = new Ayoola_Access_AuthLevel;

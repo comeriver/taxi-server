@@ -75,13 +75,13 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
 
             //  overview
             $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
-            $this->setViewContent( '<h2 style="' . $titleCss . '">Trip Overview</h2>' ); 
+            $this->setViewContent( '<h2 style="' . $titleCss . '">'  . self::getTerm( 'Trip' ) . ' Overview</h2>' ); 
 
             $totalRate = self::calcRate( $bookingInfo );
 
             $overview = '
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Booking ID:</span> ' . $bookingInfo['booking_id'] . '</div>
-                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Status:</span> ' . self::$_statusMeaning[$bookingInfo['status']] . '</div>
+                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Status:</span> ' . self::getStatusMeaning( $bookingInfo['status'] ) . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Destination:</span> ' . $bookingInfo['destination'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Start Address:</span> ' . $routeInfo['start_address'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">End Address:</span> ' . $routeInfo['end_address'] . '</div>
@@ -114,7 +114,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             foreach( $bookingInfo['status_info'] as $status => $info )
             {
                 $timeline .= '<li style="margin: 1em 1em;">';
-                $timeline .= self::$_statusMeaning[$status];
+                $timeline .= self::getStatusMeaning( $status );
                 $timeline .= ' <span style="' . $smallText . '">(';
                 if( isset( $lastStatus ) )
                 {
@@ -142,19 +142,19 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
 
             $people = '
                 <div style="' . $boxCss2 . '"><span style="' . $smallTitleCss . '">
-                ' . trim( $passengerInfo['firstname'] . ' ' . $passengerInfo['lastname'] ) . ' (Passenger):</span> 
+                ' . trim( $passengerInfo['firstname'] . ' ' . $passengerInfo['lastname'] ) . ' ('  . self::getTerm( 'Passenger' ) . '):</span> 
                     <a href="mailto:' . $passengerInfo['email'] . '">' . $passengerInfo['email'] . '</a><br>
                     <a href="tel:' . $passengerInfo['phone_number'] . '">' . $passengerInfo['phone_number'] . '</a><br>
                 </div>
                 <div style="' . $boxCss2 . '"><span style="' . $smallTitleCss . '">
-                ' . trim( $driverInfo['firstname'] . ' ' . $driverInfo['lastname'] ) . ' (Driver):</span> 
+                ' . trim( $driverInfo['firstname'] . ' ' . $driverInfo['lastname'] ) . ' ('  . self::getTerm( 'Driver' ) . '):</span> 
                     <a href="mailto:' . $driverInfo['email'] . '">' . $driverInfo['email'] . '</a><br>
                     <a href="tel:' . $driverInfo['phone_number'] . '">' . $driverInfo['phone_number'] . '</a><br>
                 </div>
             ';
             $this->setViewContent( '<div style="' . $flexContainer . '">' . $people . '</div>' ); 
 
-            $this->_objectData['goodnews'] = self::$_statusMeaning[$bookingInfo['status']];
+            $this->_objectData['goodnews'] = self::getStatusMeaning( $bookingInfo['status'] );
             $this->_objectData += $bookingInfo;
 
             // end of widget process

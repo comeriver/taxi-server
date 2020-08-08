@@ -10,9 +10,9 @@
       <TABLE_FIELD FIELD_KEY="__user_id"><![CDATA[1554892638.1731]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:6:{s:9:&quot;time_rate&quot;;s:1:&quot;2&quot;;s:13:&quot;distance_rate&quot;;s:1:&quot;5&quot;;s:14:&quot;google_api_key&quot;;s:39:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;;s:21:&quot;default_location_long&quot;;s:6:&quot;4.5418&quot;;s:20:&quot;default_location_lat&quot;;s:6:&quot;7.7827&quot;;s:17:&quot;driver_user_group&quot;;s:1:&quot;1&quot;;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;time_rate&quot;:&quot;2&quot;,&quot;distance_rate&quot;:&quot;5&quot;,&quot;google_api_key&quot;:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;,&quot;default_location_long&quot;:&quot;4.5418&quot;,&quot;default_location_lat&quot;:&quot;7.7827&quot;,&quot;driver_user_group&quot;:&quot;1&quot;}]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1596844569]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="settings"><![CDATA[a:9:{s:9:&quot;time_rate&quot;;s:1:&quot;2&quot;;s:13:&quot;distance_rate&quot;;s:1:&quot;5&quot;;s:14:&quot;google_api_key&quot;;s:39:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;;s:17:&quot;driver_user_group&quot;;s:1:&quot;1&quot;;s:20:&quot;default_location_lat&quot;;s:6:&quot;7.7827&quot;;s:21:&quot;default_location_long&quot;;s:6:&quot;4.5418&quot;;s:14:&quot;passenger_term&quot;;s:8:&quot;Customer&quot;;s:11:&quot;driver_term&quot;;s:14:&quot;Dispatch rider&quot;;s:9:&quot;trip_term&quot;;s:16:&quot;Package Delivery&quot;;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="data"><![CDATA[{&quot;time_rate&quot;:&quot;2&quot;,&quot;distance_rate&quot;:&quot;5&quot;,&quot;google_api_key&quot;:&quot;AIzaSyBf8xSLEZz5EZNh9xW5AlQ69I6AOlgIPZs&quot;,&quot;driver_user_group&quot;:&quot;1&quot;,&quot;default_location_lat&quot;:&quot;7.7827&quot;,&quot;default_location_long&quot;:&quot;4.5418&quot;,&quot;passenger_term&quot;:&quot;Customer&quot;,&quot;driver_term&quot;:&quot;Dispatch rider&quot;,&quot;trip_term&quot;:&quot;Package Delivery&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="modified_time"><![CDATA[1596919010]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[[1554892638.173078]]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>

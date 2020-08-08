@@ -47,27 +47,11 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      * @var array
      */
 	protected static $_accessLevel = array( 99, 98 );
-	
-    /**
-     * Access level for player. Defaults to everyone
-     *
-     * @var array
-     */
-	protected static $_statusMeaning = array( 
-        -2 => 'Trip canceled by passenger',
-        -1 => 'Trip canceled by ride operator',
-        0 => 'Passenger requested a ride',
-        1 => 'Passenger was matched with a ride',
-        2 => 'Ride arrived at passenger location',
-        3 => 'Trip started',
-        4 => 'Trip completed',
-        5 => 'Passenger paid for ride',
-     );
 
     /**
      * 
      */
-	protected static function cancelDriverBookings( array $identifier = null )  
+	public static function cancelDriverBookings( array $identifier = null )  
     {
         if( empty( $identifier ) )
         {
@@ -79,7 +63,30 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * 
      */
-	protected static function calcRate( $bookingInfo )  
+	public static function getStatusMeaning( $key )  
+    {
+    
+        $meaning = array( 
+            -2 => ''  . self::getTerm( 'Trip' ) . ' canceled by '  . self::getTerm( 'Passenger' ) . '',
+            -1 => ''  . self::getTerm( 'Trip' ) . ' canceled by '  . self::getTerm( 'Driver' ) . '',
+            0 => ''  . self::getTerm( 'Passenger' ) . ' requested a pick-up',
+            1 => ''  . self::getTerm( 'Passenger' ) . ' was matched with a '  . self::getTerm( 'Driver' ) . '',
+            2 => ''  . self::getTerm( 'Driver' ) . ' arrived at '  . self::getTerm( 'Passenger' ) . ' location',
+            3 => ''  . self::getTerm( 'Trip' ) . ' started',
+            4 => ''  . self::getTerm( 'Trip' ) . ' completed',
+            5 => ''  . self::getTerm( 'Passenger' ) . ' paid for '  . self::getTerm( 'Trip' ) . '',
+         );
+         if( is_null( $key ) )
+         {
+             return $meaning;
+         }
+         return $meaning[$key];
+    }
+
+    /**
+     * 
+     */
+	public static function calcRate( $bookingInfo )  
     {
         $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
         $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
@@ -92,7 +99,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * 
      */
-	protected static function cancelPassengerBookings( array $identifier = null )  
+	public static function cancelPassengerBookings( array $identifier = null )  
     {
         if( empty( $identifier ) )
         {

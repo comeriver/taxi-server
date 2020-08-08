@@ -61,7 +61,7 @@ class TaxiApp_Booking_Creator extends TaxiApp_Booking_Abstract
                 }
                 if( empty( $_POST['passenger_id'] ) )
                 {
-                    $this->_objectData['badnews'] = "Passenger is not logged in";
+                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' is not logged in';
                     return false;
                 }
                 if( ! is_array( $_POST['passenger_location'] ) )

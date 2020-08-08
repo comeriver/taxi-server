@@ -63,7 +63,7 @@ class TaxiApp_Booking_Status extends TaxiApp_Booking_Abstract
                 $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>' ); 
                 return false;
             }
-            $this->_objectData['goodnews'] = self::$_statusMeaning[$bookingInfo['status']];
+            $this->_objectData['goodnews'] = self::getStatusMeaning( $bookingInfo['status'] );
             $this->_objectData += $bookingInfo;
 
             // end of widget process

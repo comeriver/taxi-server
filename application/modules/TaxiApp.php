@@ -34,6 +34,15 @@ class TaxiApp extends NativeApp
 	protected static $_objectTitle = 'Taxi App'; 
 
     /**
+     * 
+     * 
+     */
+	public static function getTerm( $term )
+    {
+        return TaxiApp_Settings::retrieve( strtolower( $term ) . '_term' ) ? : $term;
+    }
+
+    /**
      * Performs the whole widget running process
      * 
      */
@@ -44,7 +53,6 @@ class TaxiApp extends NativeApp
             //  Code that runs the widget goes here...
 
             // end of widget process
-          
 		}  
 		catch( Exception $e )
         { 

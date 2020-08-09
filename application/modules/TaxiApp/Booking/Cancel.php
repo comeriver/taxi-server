@@ -31,7 +31,7 @@ class TaxiApp_Booking_Cancel extends TaxiApp_Booking_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = ''; 
+	protected static $_objectTitle = '';
 
     /**
      * Performs the whole widget running process

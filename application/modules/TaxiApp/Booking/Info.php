@@ -76,6 +76,7 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             //  overview
             $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
             $this->setViewContent( '<h2 style="' . $titleCss . '">'  . self::getTerm( 'Trip' ) . ' Overview</h2>' ); 
+        //    var_export( $bookingInfo['route_info'] );
 
             $totalRate = self::calcRate( $bookingInfo );
 

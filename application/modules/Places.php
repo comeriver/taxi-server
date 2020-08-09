@@ -45,6 +45,9 @@ class Places extends NativeApp
             $destination = $_GET['q'];
             if( empty( $destination ) )
             {
+                $this->_objectData['badnews'] = 'No destination has been typed in for autocomplete';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
                 return false;
             }
             $proximity = $_GET['proximity'] ? : TaxiApp_Settings::retrieve( "default_location_lat" ) . ',' . TaxiApp_Settings::retrieve( "default_location_long" );
@@ -53,15 +56,19 @@ class Places extends NativeApp
             //    return;
             $response = self::fetchLink( $apiUrl, array( 'time_out' => 60, 'connect_time_out' => 60 ) );
             $response = json_decode( $response, true );
-            $ref = array();
-            foreach( $response['predictions'] as $each )
+            if( empty( $_GET['raw_response'] ) )
             {
-                $ref[] = array( 
-                    'id' => $each['place_id'],
-                    'text' => $each['description'],
-                );
+                $ref = array();
+                foreach( $response['predictions'] as $each )
+                {
+                    $ref[] = array( 
+                        'id' => $each['place_id'],
+                        'text' => $each['description'],
+                    );
+                }
+                $response = array( 'results' => $ref );
             }
-            $this->_objectData = array( 'results' => $ref );
+            $this->_objectData = $response;
             // end of widget process
           
 		}  

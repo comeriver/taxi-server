@@ -47,10 +47,16 @@ class Places_Route extends Places
             $origin = $this->getParameter( 'origin' ) ? : $_GET['origin'];
             if( empty( $destination ) )
             {
+                $this->_objectData['badnews'] = 'No destination is set';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
                 return false;
             }
             if( empty( $origin ) )
             {
+                $this->_objectData['badnews'] = 'No origin is set';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
                 return false;
             }
             $apiUrl = 'https://maps.googleapis.com/maps/api/directions/json?key=' . TaxiApp_Settings::retrieve( "google_api_key" ) . '&origin=' . $origin . '&destination=' . $destination;
@@ -61,7 +67,7 @@ class Places_Route extends Places
             $response = json_decode( $response, true );
             if( empty( $response['routes'][0]['legs'][0] ) )
             {
-                $this->_objectData['badnews'] = "Route to destination could not be calculated";
+                $this->_objectData['badnews'] = "No route is found to the selected destination";
                 $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                 $this->setViewContent( $this->getForm()->view() );
                 return false;

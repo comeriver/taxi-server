@@ -61,6 +61,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
             }
 
 
+            $option = array();
             $where = array(
                 'driver_id' => array( '', $_POST['driver_id'] )
             );
@@ -68,13 +69,23 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
             {
                 //  We are looking for passenger
                 $where['status'] = 0;
+
+                //  blacklist old declines
+                if( ! empty( $_POST['booking_blacklist'] ) )
+                {
+                    $where['booking_id'] = $_POST['booking_blacklist'];
+                    $option['booking_id_operator'] = '!=';
+                }
             }
             else
             {
                 $where['booking_id'] = $_POST['booking_id'];
             }
+         //   $this->_objectData['debug'] = $option;
+         //   $this->_objectData['debug'] = $where;
+         //   return;
 
-            if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
+            if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where, $option ) )
             {
                 $this->_objectData['goodnews'] = 'No '  . self::getTerm( 'Passenger' ) . ' online';
                 //    $this->_objectData['badnews'] = "Booking not found in the the database";
@@ -100,6 +111,7 @@ class TaxiApp_Booking_Driver extends TaxiApp_Booking_Abstract
                 $bookingInfo = $update + $bookingInfo;
                 $this->_objectData['goodnews'] = "Booking status updated";
             }
+        //    unset( $bookingInfo['route_info'] );
             $this->_objectData += $bookingInfo;
 
             // end of widget process

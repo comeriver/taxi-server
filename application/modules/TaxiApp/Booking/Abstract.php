@@ -63,7 +63,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * 
      */
-	public static function getStatusMeaning( $key )  
+	public static function getStatusMeaning( $key = null )  
     {
     
         $meaning = array( 

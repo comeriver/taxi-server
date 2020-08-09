@@ -57,7 +57,7 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
+										'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Manual/\' );" title="">Manual Booking</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );

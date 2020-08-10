@@ -130,7 +130,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
         $fieldset->addElement( array( 'name' => 'pickup_place_id', 'label' => 'Set Pick-up Location', 'config' => array( 
             'ajax' => array( 
-                'url' => '/taxi/widgets/Places',
+                'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Places',
                 'delay' => 1000
             ),
             'placeholder' => 'e.g. 2 Adekanbi St, Ikeja',
@@ -138,7 +138,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         ), 'type' => 'Select2', 'value' => @$values['pickup_place_id'] ) ); 
         $fieldset->addElement( array( 'name' => 'destination_place_id', 'label' => 'Set Destination', 'config' => array( 
             'ajax' => array( 
-                'url' => '/taxi/widgets/Places',
+                'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Places',
                 'delay' => 1000
             ),
             'placeholder' => 'e.g. Palms Mall, Ibadan',

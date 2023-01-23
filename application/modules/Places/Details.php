@@ -51,7 +51,7 @@ class Places_Details extends Places
             }
             if( ! $info = Places_Table::getInstance()->selectOne( null, array( 'place_id' => $destination ) ) )
             {
-                $apiUrl = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . TaxiApp_Settings::retrieve( "google_api_key" ) . '&place_id=' . $destination . '&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,url,utc_offset,vicinity&sessiontoken=' . session_id();
+                $apiUrl = 'https://maps.googleapis.com/maps/api/place/details/json?key=' . TaxiApp_Settings::retrieve( "google_api_key" ) . '&place_id=' . urlencode( $destination ) . '&fields=address_component,adr_address,business_status,formatted_address,geometry,icon,name,photo,place_id,plus_code,type,url,utc_offset,vicinity&sessiontoken=' . session_id();
                 //    var_export( $apiUrl );
                 //    return;
                 $response = self::fetchLink( $apiUrl, array( 'time_out' => 60, 'connect_time_out' => 60 ) );

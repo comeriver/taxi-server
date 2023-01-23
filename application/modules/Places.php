@@ -51,7 +51,7 @@ class Places extends NativeApp
                 return false;
             }
             $proximity = $_GET['proximity'] ? : TaxiApp_Settings::retrieve( "default_location_lat" ) . ',' . TaxiApp_Settings::retrieve( "default_location_long" );
-            $apiUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=' . TaxiApp_Settings::retrieve( "google_api_key" ) . '&input=' . $destination . '&location=' . $proximity . '&radius=2000&sessiontoken=' . session_id();
+            $apiUrl = 'https://maps.googleapis.com/maps/api/place/autocomplete/json?key=' . TaxiApp_Settings::retrieve( "google_api_key" ) . '&input=' . urlencode( $destination ) . '&location=' . $proximity . '&radius=2000&sessiontoken=' . session_id();
             //    var_export( $apiUrl );
             //    return;
             $response = self::fetchLink( $apiUrl, array( 'time_out' => 60, 'connect_time_out' => 60 ) );

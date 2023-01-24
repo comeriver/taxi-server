@@ -45,6 +45,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
 
 
             $this->createForm();
+
             $this->setViewContent( $this->getForm()->view() );
             
             if( ! $values = $this->getForm()->getValues() )
@@ -52,57 +53,9 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                 return false;
             }
             $this->createForm();
-            if( empty( $values['passenger_location'] ) )
-            {
-                if( empty( $values['pickup_place_id'] ) )
-                {
-                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick up location is required';
-                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                    $this->setViewContent( $this->getForm()->view() );
-                    return false;
-                }
+            $values['passenger_id'] = Ayoola_Application::getUserInfo( 'user_id' );
 
-                if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['pickup_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
-                {
-                    $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Passenger' ) . ' Pick-up Location. ' . @$placeInfo['badnews'];
-                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                    $this->setViewContent( $this->getForm()->view() );
-                    return false;
-                }
-                $values['passenger_location'] = $placeInfo;
-            }
-
-            if( empty( $values['destination_location'] ) )
-            {
-                if( empty( $values['destination_place_id'] ) )
-                {
-                    $this->_objectData['badnews'] = ''  . self::getTerm( 'Trip' ) . ' destination is required';
-                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                    $this->setViewContent( $this->getForm()->view() );
-                    return false;
-                }
-                if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['destination_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
-                {
-                    $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Trip' ) . ' Destination. ' . @$placeInfo['badnews'];
-                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                    $this->setViewContent( $this->getForm()->view() );
-                    return false;
-                }
-                $values['destination_location'] = $placeInfo;
-                $values['destination'] = $placeInfo['name'] ? : $placeInfo['address'];
-            }
-
-            if( empty( $values['route_info'] ) )
-            {
-                if( ! $routeInfo = Places_Route::viewInLine( array( 'destination' => 'place_id:' . $values['destination_location']['place_id'], 'origin' => 'place_id:' . $values['passenger_location']['place_id'], 'return_object_data' => true ) ) OR ! empty( $routeInfo['badnews'] ) )
-                {
-                    $this->_objectData['badnews'] = 'No route found from '  . self::getTerm( 'Passenger' ) . ' pick-up location to '  . self::getTerm( 'Trip' ) . ' destination. Please change either the pick-up or destination location and try again. ' . @$placeInfo['badnews'];
-                    $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                    $this->setViewContent( $this->getForm()->view() );
-                    return false;
-                }
-                $values['route_info'] = $routeInfo;
-            }
+            $this->updateBookingInfo( $values );
 
             if( ! $bookingInfo = TaxiApp_Booking::getInstance()->insert( $values ) )
             {

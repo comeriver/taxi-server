@@ -133,6 +133,9 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             }
             $this->setViewContent( '<ul style="margin: 1em 0;">' . $timeline . '</ul>' ); 
 
+            //var_export( $bookingInfo );
+
+
             $passengerInfo = Application_User_Abstract::getUserInfo( $bookingInfo['passenger_id'] );
             $driverInfo = Application_User_Abstract::getUserInfo( $bookingInfo['driver_id'] );
 

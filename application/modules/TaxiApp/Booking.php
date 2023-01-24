@@ -25,7 +25,7 @@ class TaxiApp_Booking extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.5';  
+    protected $_tableVersion = '0.6';  
 
     /**
      * Table data types and declaration
@@ -45,6 +45,14 @@ class TaxiApp_Booking extends PageCarton_Table
         'status' => 'INT',
         'status_info' => 'JSON',
         'last_status_time' => 'INT',
+        'pickup_time' => 'INT',
+        'pickup_time_day' => 'INT',
+        'pickup_time_month' => 'INT',
+        'pickup_time_year' => 'INT',
+        'delivery_time' => 'INT',
+        'delivery_time_day' => 'INT',
+        'delivery_time_month' => 'INT',
+        'delivery_time_year' => 'INT',
       );
 
 

@@ -18,6 +18,13 @@
 
 class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
 {
+		
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected $_playMode = self::PLAY_MODE_HTML;
 
     /**
      * Performs the whole widget running process
@@ -29,10 +36,13 @@ class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
 		{ 
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-			$this->createForm( 'Save', 'Edit', $data );
+			$this->createForm( 'Save', 'Edit Bookings', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
+
+
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
+            $this->updateBookingInfo( $values );
 
 			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
 

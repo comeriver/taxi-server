@@ -18,6 +18,13 @@
 
 class TaxiApp_Booking_Delete extends TaxiApp_Booking_Abstract
 {
+		
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var boolean
+     */
+	protected $_playMode = self::PLAY_MODE_HTML;
 
     /**
      * Performs the whole widget running process

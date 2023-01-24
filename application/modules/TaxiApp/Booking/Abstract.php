@@ -96,6 +96,62 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         return $totalRate;
     }
 
+    public function updateBookingInfo(& $values )
+    {
+        if( empty( $values['passenger_location'] ) )
+        {
+            if( empty( $values['pickup_place_id'] ) )
+            {
+                $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick up location is required';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+
+            if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['pickup_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
+            {
+                $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Passenger' ) . ' Pick-up Location. ' . @$placeInfo['badnews'];
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+            $values['passenger_location'] = $placeInfo;
+        }
+
+        if( empty( $values['destination_location'] ) )
+        {
+            if( empty( $values['destination_place_id'] ) )
+            {
+                $this->_objectData['badnews'] = ''  . self::getTerm( 'Trip' ) . ' destination is required';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+            if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['destination_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
+            {
+                $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Trip' ) . ' Destination. ' . @$placeInfo['badnews'];
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+            $values['destination_location'] = $placeInfo;
+            $values['destination'] = $placeInfo['name'] ? : $placeInfo['address'];
+        }
+
+        if( empty( $values['route_info'] ) )
+        {
+            if( ! $routeInfo = Places_Route::viewInLine( array( 'destination' => 'place_id:' . $values['destination_location']['place_id'], 'origin' => 'place_id:' . $values['passenger_location']['place_id'], 'return_object_data' => true ) ) OR ! empty( $routeInfo['badnews'] ) )
+            {
+                $this->_objectData['badnews'] = 'No route found from '  . self::getTerm( 'Passenger' ) . ' pick-up location to '  . self::getTerm( 'Trip' ) . ' destination. Please change either the pick-up or destination location and try again. ' . @$placeInfo['badnews'];
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+            $values['route_info'] = $routeInfo;
+        }
+
+    }
+
     /**
      * 
      */
@@ -117,6 +173,8 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      */
 	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
     {
+        //var_export( $values );
+
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->submitValue =  'Request Pickup';
@@ -128,6 +186,12 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             $widgets[@$values['class_name']] = $values['class_name'];
         }
 
+        $preset = array();
+        if( isset( $values['passenger_location']['name'] ) ) 
+        {
+            $preset = array( $values['passenger_location']['place_id'] => $values['passenger_location']['name'] . ', ' . $values['passenger_location']['address'] );
+        }
+
         $fieldset->addElement( array( 'name' => 'pickup_place_id', 'label' => 'Set Pick-up Location', 'config' => array( 
             'ajax' => array( 
                 'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Places',
@@ -135,15 +199,27 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             ),
             'placeholder' => 'e.g. 2 Adekanbi St, Ikeja',
             'minimumInputLength' => 1,
-        ), 'type' => 'Select2', 'value' => @$values['pickup_place_id'] ) ); 
-        $fieldset->addElement( array( 'name' => 'destination_place_id', 'label' => 'Set Destination', 'config' => array( 
+        ), 'type' => 'Select2', 'value' => @$values['pickup_place_id'] ), $preset );
+
+        $fieldset->addElement( array( 'name' => 'pickup_time', 'label' => 'Preferred Pick-up Time', 'type' => 'DateTime', 'value' => @$values['pickup_time'] ? : '+3600' ) ); 
+
+        $presetDestination = array();
+        if( isset( $values['destination_location']['name'] ) ) 
+        {
+            $presetDestination = array( $values['destination_location']['place_id'] => $values['destination_location']['name'] . ', ' . $values['destination_location']['address'] );
+        }
+
+        $fieldset->addElement( array( 'name' => 'destination_place_id', 'label' => 'Set Destination Location', 'config' => array( 
             'ajax' => array( 
                 'url' => '' . Ayoola_Application::getUrlPrefix() . '/widgets/Places',
                 'delay' => 1000
             ),
             'placeholder' => 'e.g. Palms Mall, Ibadan',
             'minimumInputLength' => 1,
-        ), 'type' => 'Select2', 'value' => @$values['destination_place_id'] ) ); 
+        ), 'type' => 'Select2', 'value' => @$values['destination_place_id'] ), $presetDestination ); 
+
+        $fieldset->addElement( array( 'name' => 'delivery_time', 'label' => 'Preferred Delivery Time', 'type' => 'DateTime', 'value' => @$values['delivery_time'] ? : '+86400' ) ); 
+
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 
         $fieldset->addElement( array( 'name' => 'notes', 'type' => 'TextArea', 'placeholder' => 'Enter any further '  . self::getTerm( 'Trip' ) . ' or contact details here... (Optional)', 'value' => @$values['notes'] ) ); 

@@ -39,13 +39,31 @@ class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
 			$this->createForm( 'Save', 'Edit Bookings', $data );
 			$this->setViewContent( $this->getForm()->view(), true );
 
-
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
             $this->updateBookingInfo( $values );
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Data updated successfully</div>' ) . '', true  ); } 
+            $intrinsicStatuses = array();
+            if( ! empty( $values['driver_id']  && $values['driver_id'] != $data['driver_id'] ) )
+            {
+                $intrinsicStatuses[] = 1;  
+            }
+            if( ! empty( $values['status'] ) && $values['status'] != $data['status'] )
+            {
+                $intrinsicStatuses[] = $values['status'];
+            }
+            if( ! empty( $intrinsicStatuses ) )
+            {
+                $values['status_info'] = $data['status_info'];
+                foreach( $intrinsicStatuses as $eachStatus )
+                {
+                    $values['status_info'][$eachStatus]['time'] = time();
+                    $values['status'] = $eachStatus;
+                }
+                $values['last_status_time'] = time();
+            }
 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Booking updated successfully</div>' ) . '', true  ); } 
              // end of widget process
           
 		}  

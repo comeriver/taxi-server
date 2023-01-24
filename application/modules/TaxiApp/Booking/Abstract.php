@@ -71,7 +71,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             -1 => ''  . self::getTerm( 'Trip' ) . ' canceled by '  . self::getTerm( 'Driver' ) . '',
             0 => ''  . self::getTerm( 'Passenger' ) . ' requested a pick-up',
             1 => ''  . self::getTerm( 'Passenger' ) . ' was matched with a '  . self::getTerm( 'Driver' ) . '',
-            2 => ''  . self::getTerm( 'Driver' ) . ' arrived at '  . self::getTerm( 'Passenger' ) . ' location',
+            2 => ''  . self::getTerm( 'Driver' ) . ' arrived at pick-up location',
             3 => ''  . self::getTerm( 'Trip' ) . ' started',
             4 => ''  . self::getTerm( 'Trip' ) . ' completed',
             5 => ''  . self::getTerm( 'Passenger' ) . ' paid for '  . self::getTerm( 'Trip' ) . '',
@@ -218,7 +218,37 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             'minimumInputLength' => 1,
         ), 'type' => 'Select2', 'value' => @$values['destination_place_id'] ), $presetDestination ); 
 
-        $fieldset->addElement( array( 'name' => 'delivery_time', 'label' => 'Preferred Delivery Time', 'type' => 'DateTime', 'value' => @$values['delivery_time'] ? : '+86400' ) ); 
+        $fieldset->addElement( array( 'name' => 'delivery_time', 'label' => 'Preferred ' . self::getTerm( 'Trip' ) . ' Time', 'type' => 'DateTime', 'value' => @$values['delivery_time'] ? : '+86400' ) ); 
+
+        if( $this->hasPriviledge( array( 99, 98 ) ) )
+        {
+            $fieldset->addElement( array( 'name' => 'status', 'label' => '' . self::getTerm( 'Trip' ) . ' Status', 'type' => 'select', 'value' => @$values['status'] ), self::getStatusMeaning() ); 
+
+            $riders = Ayoola_Access_LocalUser::getInstance()->select( null, array( 'access_level' => TaxiApp_Settings::retrieve( "driver_user_group" ) ) );
+
+            // var_export( $riders );
+
+            $riderOptions = array();
+            foreach( $riders as $each )
+            {
+                $name = '';
+                //var_export(  $each );
+
+                if( isset( $each['user_information']['firstname'] ) )
+                {
+                    $name .= $each['user_information']['firstname'] . ' ';
+                }
+                if( isset( $each['user_information']['lastname'] ) )
+                {
+                    $name .= $each['user_information']['lastname'] . ' ';
+                }
+                $name .= '(' . $each['email'] . ')';
+
+                $riderOptions[$each['user_information']['user_id']] = $name;
+            }
+
+            $fieldset->addElement( array( 'name' => 'driver_id', 'label' => 'Assigned ' . self::getTerm( 'Driver' ) . '', 'type' => 'select', 'value' => @$values['driver_id'] ), $riderOptions ); 
+        }
 
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );
 

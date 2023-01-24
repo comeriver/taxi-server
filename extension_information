@@ -1,1 +1,61 @@
-{"extension_title":"Taxi App","modules":["\/Places.php","\/Places\/Details.php","\/Places\/Route.php","\/Places\/Table.php","\/TaxiApp.php","\/TaxiApp\/Booking.php","\/TaxiApp\/Booking\/Abstract.php","\/TaxiApp\/Booking\/Cancel.php","\/TaxiApp\/Booking\/CheckInfo.php","\/TaxiApp\/Booking\/Creator.php","\/TaxiApp\/Booking\/Delete.php","\/TaxiApp\/Booking\/Driver.php","\/TaxiApp\/Booking\/Editor.php","\/TaxiApp\/Booking\/Info.php","\/TaxiApp\/Booking\/List.php","\/TaxiApp\/Booking\/Manual.php","\/TaxiApp\/Booking\/Pay.php","\/TaxiApp\/Booking\/Status.php","\/TaxiApp\/Hook.php","\/TaxiApp\/Login.php","\/TaxiApp\/Settings.php"],"settings_class":"TaxiApp_Settings","databases":["\/PageCarton\/hook.xml"],"documents":null,"dependencies":["\/2020\/06\/11\/nativeapp-server-api.html"],"extension_name":"taxi_app","files":["\/modules\/Places.php","\/modules\/Places\/Details.php","\/modules\/Places\/Route.php","\/modules\/Places\/Table.php","\/modules\/TaxiApp.php","\/modules\/TaxiApp\/Booking.php","\/modules\/TaxiApp\/Booking\/Abstract.php","\/modules\/TaxiApp\/Booking\/Cancel.php","\/modules\/TaxiApp\/Booking\/CheckInfo.php","\/modules\/TaxiApp\/Booking\/Creator.php","\/modules\/TaxiApp\/Booking\/Delete.php","\/modules\/TaxiApp\/Booking\/Driver.php","\/modules\/TaxiApp\/Booking\/Editor.php","\/modules\/TaxiApp\/Booking\/Info.php","\/modules\/TaxiApp\/Booking\/List.php","\/modules\/TaxiApp\/Booking\/Manual.php","\/modules\/TaxiApp\/Booking\/Pay.php","\/modules\/TaxiApp\/Booking\/Status.php","\/modules\/TaxiApp\/Hook.php","\/modules\/TaxiApp\/Login.php","\/modules\/TaxiApp\/Settings.php","\/databases\/PageCarton\/hook.xml","\/databases\/PageCarton\/__\/hook"]}
+{
+    "extension_title": "Taxi App",
+    "modules": [
+        "\/Places.php",
+        "\/Places\/Details.php",
+        "\/Places\/Route.php",
+        "\/Places\/Table.php",
+        "\/TaxiApp.php",
+        "\/TaxiApp\/Booking.php",
+        "\/TaxiApp\/Booking\/Abstract.php",
+        "\/TaxiApp\/Booking\/Cancel.php",
+        "\/TaxiApp\/Booking\/CheckInfo.php",
+        "\/TaxiApp\/Booking\/Creator.php",
+        "\/TaxiApp\/Booking\/Delete.php",
+        "\/TaxiApp\/Booking\/Driver.php",
+        "\/TaxiApp\/Booking\/Editor.php",
+        "\/TaxiApp\/Booking\/Info.php",
+        "\/TaxiApp\/Booking\/List.php",
+        "\/TaxiApp\/Booking\/Manual.php",
+        "\/TaxiApp\/Booking\/Pay.php",
+        "\/TaxiApp\/Booking\/Status.php",
+        "\/TaxiApp\/Hook.php",
+        "\/TaxiApp\/Login.php",
+        "\/TaxiApp\/Settings.php"
+    ],
+    "settings_class": "TaxiApp_Settings",
+    "databases": [
+        "\/PageCarton\/hook.xml",
+        "\/Ayoola\/Access\/authlevel.xml"
+    ],
+    "documents": null,
+    "dependencies": [
+        "\/2020\/06\/11\/nativeapp-server-api.html"
+    ],
+    "extension_name": "taxi_app",
+    "files": [
+        "\/modules\/Places.php",
+        "\/modules\/Places\/Details.php",
+        "\/modules\/Places\/Route.php",
+        "\/modules\/Places\/Table.php",
+        "\/modules\/TaxiApp.php",
+        "\/modules\/TaxiApp\/Booking.php",
+        "\/modules\/TaxiApp\/Booking\/Abstract.php",
+        "\/modules\/TaxiApp\/Booking\/Cancel.php",
+        "\/modules\/TaxiApp\/Booking\/CheckInfo.php",
+        "\/modules\/TaxiApp\/Booking\/Creator.php",
+        "\/modules\/TaxiApp\/Booking\/Delete.php",
+        "\/modules\/TaxiApp\/Booking\/Driver.php",
+        "\/modules\/TaxiApp\/Booking\/Editor.php",
+        "\/modules\/TaxiApp\/Booking\/Info.php",
+        "\/modules\/TaxiApp\/Booking\/List.php",
+        "\/modules\/TaxiApp\/Booking\/Manual.php",
+        "\/modules\/TaxiApp\/Booking\/Pay.php",
+        "\/modules\/TaxiApp\/Booking\/Status.php",
+        "\/modules\/TaxiApp\/Hook.php",
+        "\/modules\/TaxiApp\/Login.php",
+        "\/modules\/TaxiApp\/Settings.php",
+        "\/databases\/PageCarton\/hook.xml",
+        "\/databases\/PageCarton\/__\/hook"
+    ]
+}

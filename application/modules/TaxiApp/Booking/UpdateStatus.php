@@ -6,17 +6,17 @@
  * LICENSE
  *
  * @category   PageCarton
- * @package    TaxiApp_Booking_Editor
+ * @package    TaxiApp_Booking_UpdateStatus
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: Editor.php Wednesday 20th of December 2017 08:14PM ayoola@ayoo.la $
+ * @version    $Id: UpdateStatus.php Wednesday 20th of December 2017 08:14PM ayoola@ayoo.la $
  */
 
 /**
  * @see PageCarton_Widget
  */
 
-class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
+class TaxiApp_Booking_UpdateStatus extends TaxiApp_Booking_Editor
 {
 		
     /**
@@ -36,7 +36,11 @@ class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
 		{ 
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
-			$this->createForm( 'Save', 'Edit Bookings', $data );
+
+			$this->createForm( 'Save', 'Update Booking Status', $data );
+
+            $this->getForm()->setParameter( array( 'element_whitelist' => 'status' ) );
+
 			$this->setViewContent( $this->getForm()->view(), true );
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }

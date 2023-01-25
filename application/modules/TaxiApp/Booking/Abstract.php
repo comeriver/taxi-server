@@ -96,7 +96,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         return $totalRate;
     }
 
-    public function updateBookingInfo(& $values )
+    public function updateBookingInfo(& $values, $data = array() )
     {
         if( empty( $values['passenger_location'] ) )
         {
@@ -149,6 +149,27 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             }
             $values['route_info'] = $routeInfo;
         }
+
+        $intrinsicStatuses = array();
+        if( ! empty( $values['driver_id']  && $values['driver_id'] != $data['driver_id'] ) )
+        {
+            $intrinsicStatuses[] = 1;  
+        }
+        if( ! empty( $values['status'] ) && $values['status'] != $data['status'] )
+        {
+            $intrinsicStatuses[] = $values['status'];
+        }
+        if( ! empty( $intrinsicStatuses ) )
+        {
+            $values['status_info'] = $data['status_info'];
+            foreach( $intrinsicStatuses as $eachStatus )
+            {
+                $values['status_info'][$eachStatus]['time'] = time();
+                $values['status'] = $eachStatus;
+            }
+            $values['last_status_time'] = time();
+        }
+
 
     }
 
@@ -222,9 +243,15 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
         if( $this->hasPriviledge( array( 99, 98 ) ) )
         {
-            $fieldset->addElement( array( 'name' => 'status', 'label' => '' . self::getTerm( 'Trip' ) . ' Status', 'type' => 'select', 'value' => @$values['status'] ), self::getStatusMeaning() ); 
+            $fieldset->addElement( array( 'name' => 'status', 'label' => '' . self::getTerm( 'Trip' ) . ' Status', 'type' => 'select', 'value' => @$values['status'] ? : '0' ), self::getStatusMeaning() ); 
 
-            $riders = Ayoola_Access_LocalUser::getInstance()->select( null, array( 'access_level' => TaxiApp_Settings::retrieve( "driver_user_group" ) ) );
+            $whereRider = array();
+            if( TaxiApp_Settings::retrieve( "driver_user_group" ) )
+            {
+                $whereRider = array( 'access_level' => TaxiApp_Settings::retrieve( "driver_user_group" ) );
+            }
+
+            $riders = Ayoola_Access_LocalUser::getInstance()->select( null, $whereRider );
 
             // var_export( $riders );
 
@@ -246,8 +273,12 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
                 $riderOptions[$each['user_information']['user_id']] = $name;
             }
+            if( empty( $riderOptions ) )
+            {
+                $riderOptions[''] = 'No ' . self::getTerm( 'Driver' ) . ' on the site yet. ';
+            }
 
-            $fieldset->addElement( array( 'name' => 'driver_id', 'label' => 'Assigned ' . self::getTerm( 'Driver' ) . '', 'type' => 'select', 'value' => @$values['driver_id'] ), $riderOptions ); 
+            $fieldset->addElement( array( 'name' => 'driver_id', 'label' => 'Assigned ' . self::getTerm( 'Driver' ) . '', 'type' => 'Select2', 'value' => @$values['driver_id'] ), $riderOptions ); 
         }
 
         $fieldset->addRequirements( array( 'NotEmpty' => null ) );

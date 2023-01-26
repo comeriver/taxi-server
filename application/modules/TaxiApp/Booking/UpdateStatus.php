@@ -25,6 +25,13 @@ class TaxiApp_Booking_UpdateStatus extends TaxiApp_Booking_Editor
      * @var boolean
      */
 	protected $_playMode = self::PLAY_MODE_HTML;
+	
+    /**
+     * Access level for player. Defaults to everyone
+     *
+     * @var array
+     */
+	protected static $_accessLevel = array( 1 );
 
     /**
      * Performs the whole widget running process
@@ -34,10 +41,11 @@ class TaxiApp_Booking_UpdateStatus extends TaxiApp_Booking_Editor
     {    
 		try
 		{ 
+
             //  Code that runs the widget goes here...
 			if( ! $data = $this->getIdentifierData() ){ return false; }
 
-			$this->createForm( 'Save', 'Update Booking Status', $data );
+			$this->createForm( 'Save', 'Update Booking Status for #' . $data['booking_id'], $data );
 
             $this->getForm()->setParameter( array( 'element_whitelist' => 'status' ) );
 
@@ -47,7 +55,7 @@ class TaxiApp_Booking_UpdateStatus extends TaxiApp_Booking_Editor
 
             $this->updateBookingInfo( $values, $data );
 
-			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Booking updated successfully</div>' ) . '', true  ); } 
+			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Booking status updated successfully</div>' ) . '', true  ); } 
              // end of widget process
           
 		}  

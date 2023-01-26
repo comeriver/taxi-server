@@ -76,22 +76,21 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             //  overview
             $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
             $this->setViewContent( '<h2 style="' . $titleCss . '">'  . self::getTerm( 'Trip' ) . ' Overview</h2>' ); 
-        //    var_export( $bookingInfo['route_info'] );
 
             $totalRate = self::calcRate( $bookingInfo );
-
+            
             $overview = '
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Booking ID:</span> ' . $bookingInfo['booking_id'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Status:</span> ' . self::getStatusMeaning( $bookingInfo['status'] ) . '</div>
-                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Destination:</span> ' . $bookingInfo['destination'] . '</div>
-                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Start Address:</span> ' . $routeInfo['start_address'] . '</div>
+                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Destination:</span> ' . $bookingInfo['destination'] . ' <br><span style="font-size:small;"> ' . date( 'g:ia, D jS M Y', $bookingInfo['delivery_time'] ) . '</span></div>
+                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Start Address:</span> ' . $routeInfo['start_address'] . ' <br> <span style="font-size:small;">' . date( 'g:ia, D jS M Y', $bookingInfo['pickup_time'] ) . '</span></div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">End Address:</span> ' . $routeInfo['end_address'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Estimated Rate:</span> ' . Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) . $totalRate . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Distance:</span> ' . $routeInfo['distance']['text'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Duration:</span> ' . $routeInfo['duration']['text'] . '</div>
             ';
             $this->setViewContent( '<div style="' . $flexContainer . '">' . $overview . '</div>' ); 
-            //    var_export( $routeInfo );
+
             //  Links
             $this->setViewContent( '
                 <div style="' . $titleCss . '"> 
@@ -106,11 +105,8 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
 
             $this->setViewContent( '<h3 style="' . $titleCss . '">Timeline</h3>' ); 
             $timeline = null;
-        //    var_export( $bookingInfo['status_info'] );
-        //    Ayoola_Filter_Time::splitSeconds(  );
             $bookingInfo['status_info'][0]['time'] = $bookingInfo['creation_time'];
             ksort( $bookingInfo['status_info'] );
-        //    var_export( $bookingInfo['status_info'] );
 
             foreach( $bookingInfo['status_info'] as $status => $info )
             {
@@ -120,12 +116,11 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
                 if( isset( $lastStatus ) )
                 {
                     $waitingTime =  intval( $bookingInfo['status_info'][$status]['time'] ) - intval( $bookingInfo['status_info'][$lastStatus]['time'] );
-                //    var_export( $waitingTime );
                     $timeline .= '+' . Ayoola_Filter_Time::splitSeconds( $waitingTime );
                 }
                 else
                 {
-                    $timeline .= date( 'g:ia, D jS M Y' );
+                    $timeline .= date( 'g:ia, D jS M Y', $bookingInfo['status_info'][$status]['time'] );
                 }
                 $timeline .= ')</span> ';
                 $timeline .= '</li>';

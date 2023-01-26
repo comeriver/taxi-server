@@ -71,7 +71,10 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 				|| $this->getParameter( 'driver_mode' )
 			)
             {
+				$list->listTitle = 'Booking Management';
+
 				$where['driver_id'] = Ayoola_Application::getUserInfo( 'user_id' );
+				$editKey = ' <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Info/?' . $this->getIdColumn() . '=%KEY%">Booking Details</a>';
             }
 			else
 			{
@@ -87,27 +90,43 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 		if( $pendingPickups = TaxiApp_Booking::getInstance()->select( null, $where + array( 'status' => array( 0, 1 ) ) ) )
 		{
 			$listOptions += array( 
-				'pickup' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_List/?pickups=1\' );" title="">Pending Pick-ups ( ' . count( $pendingPickups ) . ' )</a>',    
+				'pickup' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_List/?view_type=pickup\', \'' . $this->getObjectName() . '\' );" title="">Pending Pick-ups ( ' . count( $pendingPickups ) . ' )</a>',    
 			);
 		}
 
-		if( $pendingDeliveries = TaxiApp_Booking::getInstance()->select( null, $where + array( 'status' => array( 2,3,4,5 ) ) ) )
+		if( $pendingDeliveries = TaxiApp_Booking::getInstance()->select( null, $where + array( 'status' => array( 2,3 ) ) ) )
 		{
 			$listOptions += array( 
-				'Delivery' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_List/?deliveries=1\' );" title="">Pending Deliveries ( ' . count( $pendingDeliveries ) . ' )</a>',    
+				'Delivery' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_List/?view_type=delivery\', \'' . $this->getObjectName() . '\' );" title="">Pending Deliveries ( ' . count( $pendingDeliveries ) . ' )</a>',    
 			);
 		}
 
 		$listOptions += array( 
-			'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Manual/\' );" title="">Manual Booking</a>',    
+			'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Manual/\', \'' . $this->getObjectName() . '\' );" title="">Manual Booking</a>',    
 		);
+
+		if( isset( $_REQUEST['view_type'] ) )
+		{
+			if( $_REQUEST['view_type'] == 'pickup' )
+			{
+				$allBookings = $pendingPickups;
+				$list->listTitle = 'Pending Pickups';
+
+			}
+			if( $_REQUEST['view_type'] == 'delivery' )
+			{
+				$allBookings = $pendingDeliveries;
+				$list->listTitle = 'Pending Deliveries';
+			}
+			$listOptions = array( 'Creator' => '' );
+		}
 
 		$list->setData( $allBookings );
 		$list->setListOptions( 
 								$listOptions
 							);
 		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No data added to this table yet.' );
+		$list->setNoRecordMessage( 'No bookings that match your criteria here.' );
 
 		$listInfo = 			array(
 		'Booking ID' => array( 'field' => 'booking_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
@@ -116,16 +135,25 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 		'Pick up' => array( 'field' => 'pickup_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'Delivery' => array( 'field' => 'delivery_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'status' => array( 'field' => 'status', 'value' =>  '%FIELD%', 'value_representation' =>  self::getStatusMeaning() ), 
-		'' => '%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Info/?' . $this->getIdColumn() . '=%KEY%">Booking Details</a>', 
+		'<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Info/?' . $this->getIdColumn() . '=%KEY%">Details</a>', 
 		);
 
 
 		if( $this->hasPriviledge( array( 99, 98 ) ) )
 		{
 			$listInfo += 			array(
-				'%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Editor/?' . $this->getIdColumn() . '=%KEY%">Edit</a>', 
-				'%FIELD% <a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
+				' ' => '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Editor/?' . $this->getIdColumn() . '=%KEY%">Edit</a>', 
+				'   ' => '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Delete/?' . $this->getIdColumn() . '=%KEY%">x</a>', 
 			);
+		}
+
+		if( ( TaxiApp_Settings::retrieve( "driver_user_group" ) && TaxiApp_Settings::retrieve( "driver_user_group" ) == Ayoola_Application::getUserInfo( 'access_level' ) )
+		|| $this->getParameter( 'driver_mode' ) )
+		{
+			$listInfo += 			array(
+				' ' => '<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_UpdateStatus/?' . $this->getIdColumn() . '=%KEY%">Status</a>', 
+			);
+
 		}
 		
 		$list->createList( $listInfo );

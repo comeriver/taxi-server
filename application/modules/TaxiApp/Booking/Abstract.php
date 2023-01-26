@@ -98,16 +98,8 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
     public function updateBookingInfo(& $values, $data = array() )
     {
-        if( empty( $values['passenger_location'] ) )
+        if( ! empty( $values['pickup_place_id'] ) && empty( $values['passenger_location'] ) )
         {
-            if( empty( $values['pickup_place_id'] ) )
-            {
-                $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick up location is required';
-                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                $this->setViewContent( $this->getForm()->view() );
-                return false;
-            }
-
             if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['pickup_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
             {
                 $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Passenger' ) . ' Pick-up Location. ' . @$placeInfo['badnews'];
@@ -118,15 +110,8 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             $values['passenger_location'] = $placeInfo;
         }
 
-        if( empty( $values['destination_location'] ) )
+        if( ! empty( $values['destination_place_id'] ) && empty( $values['destination_location'] ) )
         {
-            if( empty( $values['destination_place_id'] ) )
-            {
-                $this->_objectData['badnews'] = ''  . self::getTerm( 'Trip' ) . ' destination is required';
-                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
-                $this->setViewContent( $this->getForm()->view() );
-                return false;
-            }
             if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['destination_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
             {
                 $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Trip' ) . ' Destination. ' . @$placeInfo['badnews'];
@@ -138,7 +123,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             $values['destination'] = $placeInfo['name'] ? : $placeInfo['address'];
         }
 
-        if( empty( $values['route_info'] ) )
+        if( ! empty( $values['passenger_location']['place_id'] ) && ! empty( $values['destination_location']['place_id'] ) && empty( $values['route_info'] ) )
         {
             if( ! $routeInfo = Places_Route::viewInLine( array( 'destination' => 'place_id:' . $values['destination_location']['place_id'], 'origin' => 'place_id:' . $values['passenger_location']['place_id'], 'return_object_data' => true ) ) OR ! empty( $routeInfo['badnews'] ) )
             {
@@ -192,13 +177,13 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      * param string Value of the Legend
      * param array Default Values
      */
-	public function createForm( $submitValue = null, $legend = null, Array $values = null )  
+	public function createForm( $submitValue = 'Request Pickup' , $legend = null, Array $values = null )  
     {
         //var_export( $values );
 
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
-		$form->submitValue =  'Request Pickup';
+		$form->submitValue =  $submitValue;
 
         $fieldset = new Ayoola_Form_Element;
         $widgets = Ayoola_Object_Embed::getWidgets();
@@ -241,9 +226,12 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
         $fieldset->addElement( array( 'name' => 'delivery_time', 'label' => 'Preferred ' . self::getTerm( 'Trip' ) . ' Time', 'type' => 'DateTime', 'value' => @$values['delivery_time'] ? : '+86400' ) ); 
 
-        if( $this->hasPriviledge( array( 99, 98 ) ) )
+        if( $this->hasPriviledge( array( 99, 98 ) ) || ( TaxiApp_Settings::retrieve( "driver_user_group" ) && TaxiApp_Settings::retrieve( "driver_user_group" ) == Ayoola_Application::getUserInfo( 'access_level' ) ) )
         {
             $fieldset->addElement( array( 'name' => 'status', 'label' => '' . self::getTerm( 'Trip' ) . ' Status', 'type' => 'select', 'value' => @$values['status'] ? : '0' ), self::getStatusMeaning() ); 
+        }
+        if( $this->hasPriviledge( array( 99, 98 ) ) )
+        {
 
             $whereRider = array();
             if( TaxiApp_Settings::retrieve( "driver_user_group" ) )
@@ -276,6 +264,10 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             if( empty( $riderOptions ) )
             {
                 $riderOptions[''] = 'No ' . self::getTerm( 'Driver' ) . ' on the site yet. ';
+            }
+            else
+            {
+                $riderOptions = array( '' => 'Select ' . self::getTerm( 'Driver' ) ) + $riderOptions;
             }
 
             $fieldset->addElement( array( 'name' => 'driver_id', 'label' => 'Assigned ' . self::getTerm( 'Driver' ) . '', 'type' => 'Select2', 'value' => @$values['driver_id'] ), $riderOptions ); 

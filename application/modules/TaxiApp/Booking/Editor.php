@@ -41,6 +41,22 @@ class TaxiApp_Booking_Editor extends TaxiApp_Booking_Abstract
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 
+            if( empty( $values['pickup_place_id'] ) )
+            {
+                $this->_objectData['badnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick up location is required';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+
+            if( empty( $values['destination_place_id'] ) )
+            {
+                $this->_objectData['badnews'] = ''  . self::getTerm( 'Trip' ) . ' destination is required';
+                $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
+                $this->setViewContent( $this->getForm()->view() );
+                return false;
+            }
+            
             $this->updateBookingInfo( $values, $data );
 
 			if( $this->updateDb( $values ) ){ $this->setViewContent(  '' . self::__( '<div class="goodnews">Booking updated successfully</div>' ) . '', true  ); } 

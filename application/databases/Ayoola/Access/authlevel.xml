@@ -8,7 +8,7 @@
       <TABLE_FIELD FIELD_KEY="storage_size"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="max_allowed_posts"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="max_allowed_posts_private"><![CDATA[]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[[&quot;inherit&quot;,&quot;attach_forms&quot;]]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="auth_options"><![CDATA[[&quot;inherit&quot;,&quot;attach_forms&quot;,&quot;allow_signup&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="parent_access_level"><![CDATA[[&quot;1&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="additional_forms"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="display_picture"><![CDATA[]]></TABLE_FIELD>

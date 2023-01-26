@@ -56,7 +56,6 @@ class Places_Details extends Places
                 //    return;
                 $response = self::fetchLink( $apiUrl, array( 'time_out' => 60, 'connect_time_out' => 60 ) );
                 $response = json_decode( $response, true );
-                //      var_export( $response );
                 if( empty( $response['result']['geometry']['location']['lng'] ) )
                 {
                     $this->_objectData['badnews'] = 'Invalid Place ID';
@@ -64,6 +63,42 @@ class Places_Details extends Places
                     return false;
                 }
                 $info['name'] = $response['result']['name'];
+                $addressComponents = (array) $response['result']['address_components'];
+                //krsort( $addressComponents );
+                foreach( $addressComponents as $eachAdd )
+                {
+                    if( isset( $eachAdd['types'] ) )
+                    {
+                        if( in_array( 'country', $eachAdd['types'] ) )
+                        {
+                            $info['country'] = $eachAdd['long_name'];
+                        }
+                        elseif( in_array( 'administrative_area_level_1', $eachAdd['types'] ) )
+                        {
+                            $info['state'] = $eachAdd['long_name'];
+                        }
+                        elseif( in_array( 'administrative_area_level_2', $eachAdd['types'] ) )
+                        {
+                            $info['lga'] = $eachAdd['long_name'];
+                        }
+                        elseif( in_array( 'locality', $eachAdd['types'] ) )
+                        {
+                            $info['city'] = $eachAdd['long_name'];
+                        }
+                        elseif( in_array( 'neighborhood', $eachAdd['types'] ) )
+                        {
+                            $info['neighborhood'] = $eachAdd['long_name'];
+                        }
+                        elseif( in_array( 'postal_code', $eachAdd['types'] ) )
+                        {
+                            $info['postal_code'] = $eachAdd['long_name'];
+                        }
+                    }
+                }
+                //var_export( $info );
+                //var_export( $addressComponents );
+                //exit();
+
                 $info['address'] = $response['result']['formatted_address'];
                 $info['longitude'] = $response['result']['geometry']['location']['lng'];
                 $info['latitude'] = $response['result']['geometry']['location']['lat'];
@@ -72,14 +107,11 @@ class Places_Details extends Places
                 Places_Table::getInstance()->insert( $info );    
             }
             $this->_objectData = $info;
-        //    var_export( $this->_objectData );
-            // end of widget process
           
 		}  
 		catch( Exception $e )
         { 
             //  Alert! Clear the all other content and display whats below.
-        //    $this->setViewContent( self::__( '<p class="badnews">' . $e->getMessage() . '</p>' ) ); 
             $this->setViewContent( self::__( '<p class="badnews">Theres an error in the code</p>' ) ); 
             return false; 
         }

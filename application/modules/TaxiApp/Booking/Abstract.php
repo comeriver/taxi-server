@@ -88,6 +88,8 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      */
 	public static function calcRate( $bookingInfo )  
     {
+        //var_export( $bookingInfo );
+
         $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
         $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
         $distanceRate = TaxiApp_Settings::retrieve( "distance_rate" ) * $routeInfo['distance']['value'];
@@ -102,6 +104,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         {
             if( ! $placeInfo = Places_Details::viewInLine( array( 'place_id' => $values['pickup_place_id'], 'return_object_data' => true ) ) OR ! empty( $placeInfo['badnews'] ) )
             {
+
                 $this->_objectData['badnews'] = 'Invalid '  . self::getTerm( 'Passenger' ) . ' Pick-up Location. ' . @$placeInfo['badnews'];
                 $this->setViewContent( '<p class="badnews">' . $this->_objectData['badnews'] . '</p>', true );
                 $this->setViewContent( $this->getForm()->view() );

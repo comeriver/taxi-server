@@ -25,7 +25,7 @@ class Places_Table extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.4';  
+    protected $_tableVersion = '0.5';  
 
     /**
      * Table data types and declaration
@@ -36,6 +36,12 @@ class Places_Table extends PageCarton_Table
 	protected $_dataTypes = array (
         'place_id' => 'INPUTTEXT',
         'name' => 'INPUTTEXT',
+        'city' => 'INPUTTEXT',
+        'state' => 'INPUTTEXT',
+        'country' => 'INPUTTEXT',
+        'lga' => 'INPUTTEXT',
+        'neighborhood' => 'INPUTTEXT',
+        'postal_code' => 'INPUTTEXT',
         'address' => 'INPUTTEXT',
         'longitude' => 'INPUTTEXT',
         'latitude' => 'INPUTTEXT',

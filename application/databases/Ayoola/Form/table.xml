@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<DOCUMENT_ELEMENT table_name="table" creation_time="1591911737" modified_time="1591911737" table_version="0.19" module_version="1.00" table_class="Ayoola_Form_Table" creation_ip="0">
+<DOCUMENT_ELEMENT table_name="table" creation_time="1674758181" modified_time="1674758181" table_version="0.20" module_version="1.00" table_class="Ayoola_Form_Table" creation_ip="0">
   <RECORDS autoId="2">
     <TABLE_ROW ROW_ID="1">
       <TABLE_FIELD FIELD_KEY="form_title"><![CDATA[Supplementary Sign up Form]]></TABLE_FIELD>
@@ -9,7 +9,7 @@
       <TABLE_FIELD FIELD_KEY="button_value"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="form_options"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[[&quot;0&quot;]]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="email"><![CDATA[ayoola@ayoo.la]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="email"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="requirements"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="element_title"><![CDATA[[&quot;Firstname&quot;,&quot;Surname&quot;,&quot;Phone Number&quot;]]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="element_name"><![CDATA[[&quot;firstname&quot;,&quot;lastname&quot;,&quot;phone_number&quot;]]]></TABLE_FIELD>
@@ -32,10 +32,12 @@
       <TABLE_FIELD FIELD_KEY="__update_user_id"><![CDATA[null]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__ip"><![CDATA[{&quot;REMOTE_ADDR&quot;:&quot;::1&quot;,&quot;HTTP_CLIENT_IP&quot;:&quot;&quot;,&quot;HTTP_X_FORWARDED_FOR&quot;:&quot;&quot;}]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="__duuid"><![CDATA[fbacdaf5-2688-4798-b1f8-db80e2bb9ae8]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="entry_categories"><![CDATA[null]]></TABLE_FIELD>
     </TABLE_ROW>
   </RECORDS>
   <TABLE_SETTINGS>
-    <DATA_TYPES form_name="INPUTTEXT, UNIQUE, RELATIVES = Ayoola_Form_Table_Data" form_title="INPUTTEXT" form_description="TEXTAREA" form_success_message="TEXTAREA" auth_level="JSON" email="INPUTTEXT" button_value="INPUTTEXT" group_names="JSON" group_descriptions="JSON" group_ids="JSON" form_options="JSON" requirements="JSON" callbacks="JSON" element_title="JSON" element_placeholder="JSON" element_type="JSON" element_group_name="JSON" element_name="JSON" element_default_value="JSON" element_validators="JSON" element_importance="JSON" element_access_level="JSON" element_multioptions="JSON" table_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT" __user_id="INPUTTEXT" __update_user_id="JSON" __user_agent_id="INPUTTEXT" __ip="JSON"/>
+    <DATA_TYPES form_name="INPUTTEXT, UNIQUE, RELATIVES = Ayoola_Form_Table_Data" form_title="INPUTTEXT" form_description="TEXTAREA" form_success_message="TEXTAREA" auth_level="JSON" email="INPUTTEXT" button_value="INPUTTEXT" group_names="JSON" group_descriptions="JSON" group_ids="JSON" form_options="JSON" requirements="JSON" callbacks="JSON" element_title="JSON" element_placeholder="JSON" element_type="JSON" element_group_name="JSON" element_name="JSON" element_default_value="JSON" element_validators="JSON" element_importance="JSON" element_access_level="JSON" element_multioptions="JSON" entry_categories="JSON" table_id="INPUTTEXT" creation_time="INPUTTEXT" modified_time="INPUTTEXT" __user_id="INPUTTEXT" __update_user_id="JSON" __user_agent_id="INPUTTEXT" __ip="JSON" __duuid="INPUTTEXT"/>
     <FOREIGN_KEYS/>
     <RELATIVES/>
   </TABLE_SETTINGS>

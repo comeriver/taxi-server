@@ -78,14 +78,15 @@ class TaxiApp_Booking_Info extends TaxiApp_Booking_Abstract
             $this->setViewContent( '<h2 style="' . $titleCss . '">'  . self::getTerm( 'Trip' ) . ' Overview</h2>' ); 
 
             $totalRate = self::calcRate( $bookingInfo );
-            
+            $currency = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
+
             $overview = '
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Booking ID:</span> ' . $bookingInfo['booking_id'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Status:</span> ' . self::getStatusMeaning( $bookingInfo['status'] ) . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Destination:</span> ' . $bookingInfo['destination'] . ' <br><span style="font-size:small;"> ' . date( 'g:ia, D jS M Y', $bookingInfo['delivery_time'] ) . '</span></div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Start Address:</span> ' . $routeInfo['start_address'] . ' <br> <span style="font-size:small;">' . date( 'g:ia, D jS M Y', $bookingInfo['pickup_time'] ) . '</span></div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">End Address:</span> ' . $routeInfo['end_address'] . '</div>
-                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Estimated Rate:</span> ' . Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) . $totalRate . '</div>
+                <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Estimated Rate:</span> ' . $currency . $totalRate . ' (' . $currency . intval( $bookingInfo['paid']) . ' paid)</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Distance:</span> ' . $routeInfo['distance']['text'] . '</div>
                 <div style="' . $boxCss . '"><span style="' . $smallTitleCss . '">Duration:</span> ' . $routeInfo['duration']['text'] . '</div>
             ';

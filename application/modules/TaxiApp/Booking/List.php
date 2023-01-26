@@ -140,6 +140,7 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 		$list->setKey( $this->getIdColumn() );
 		$list->setNoRecordMessage( 'No bookings that match your criteria here.' );
 
+		$currency = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
 		$listInfo = 			array(
 		'Booking ID' => array( 'field' => 'booking_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
 		'to' => array( 'field' => 'destination', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
@@ -147,7 +148,7 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 		'Pick up' => array( 'field' => 'pickup_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'Delivery' => array( 'field' => 'delivery_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'status' => array( 'field' => 'status', 'value' =>  '%FIELD%', 'value_representation' =>  self::getStatusMeaning() ), 
-		'paid' => array( 'field' => 'paid', 'value' =>  '%FIELD%' ), 
+		'paid' => array( 'field' => 'paid', 'value' =>  $currency . '%FIELD%' , 'filter' =>  'Ayoola_Filter_Currency' ),
 		'<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Info/?' . $this->getIdColumn() . '=%KEY%">Details</a>', 
 		);
 

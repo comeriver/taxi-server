@@ -80,12 +80,18 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
 
             $values['cycle_name'] = 'One-time Payment';   
             $values['cycle_label'] = '';
+            $values['booking_id'] = $bookingInfo['booking_id'];
             $values['price_id'] = __CLASS__;
             $values['subscription_description'] = $bookingInfo['destination'];
             //
             //	After we checkout this is where we want to come to
+            $values['url'] = '' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info?booking_id=' . $bookingInfo['booking_id'];
             $values['classplayer_link'] = "javascript:;";
-            $values['object_id'] = $data['article_url'];
+
+            $values['callback'] = __CLASS__;
+			$values['cart_item_type'] = __CLASS__;
+			$values['cart_password'] = __CLASS__;
+
             $class->subscribe( $values );
 
             header( 'Location: ' . Ayoola_Application::getUrlPrefix() . '/cart' );
@@ -101,5 +107,50 @@ class TaxiApp_Booking_Pay extends TaxiApp_Booking_Abstract
             return false; 
         }
 	}
+
+    /**
+     * Performs confirmation when user payment is completed
+     * 
+     * param array Order information
+     */
+	public static function callback(& $orderInfo )
+    {
+        switch( strtolower( $orderInfo['order_status'] ) )
+        { 
+            case 'payment successful':
+            case '99':
+            case '100':
+                
+                if( ! empty( $orderInfo['payment_confirmed'] ) )
+                {
+                    //  don't transfer twice
+                    break;
+                }
+				
+                $where = array(
+                    'booking_id' => $orderInfo['booking_id']
+                );
+                if( ! $bookingInfo = TaxiApp_Booking::getInstance()->selectOne( null, $where ) )
+                {
+                    return false;
+                }
+                
+                $totalRate = self::calcRate( $bookingInfo );
+
+                if( $orderInfo['price'] != $totalRate )
+                {
+                    return false;
+                }
+
+                $orderInfo['payment_confirmed'] = true;
+
+                $bookingInfo['status_info'][5]['time'] = time();
+
+                TaxiApp_Booking::getInstance()->update( array( 'paid' => $orderInfo['price'] ), $where );
+
+			break;
+		}
+	}
+
 	// END OF CLASS
 }

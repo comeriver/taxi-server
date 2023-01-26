@@ -67,6 +67,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     {
     
         $meaning = array( 
+            -3 => ''  . self::getTerm( 'Passenger' ) . ' paid for '  . self::getTerm( 'Trip' ) . '',
             -2 => ''  . self::getTerm( 'Trip' ) . ' canceled by '  . self::getTerm( 'Passenger' ) . '',
             -1 => ''  . self::getTerm( 'Trip' ) . ' canceled by '  . self::getTerm( 'Driver' ) . '',
             0 => ''  . self::getTerm( 'Passenger' ) . ' requested a pick-up',
@@ -74,7 +75,6 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             2 => ''  . self::getTerm( 'Driver' ) . ' arrived at pick-up location',
             3 => ''  . self::getTerm( 'Trip' ) . ' started',
             4 => ''  . self::getTerm( 'Trip' ) . ' completed',
-            5 => ''  . self::getTerm( 'Passenger' ) . ' paid for '  . self::getTerm( 'Trip' ) . '',
          );
          if( is_null( $key ) )
          {
@@ -90,12 +90,42 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     {
         //var_export( $bookingInfo );
 
-        $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
-        $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
-        $distanceRate = TaxiApp_Settings::retrieve( "distance_rate" ) * $routeInfo['distance']['value'];
+        //  check city level rate 
+        $cityBased = array( 
+            'from_city' => strtolower( $bookingInfo['passenger_location']['city'] ),
+            'from_state' => strtolower( $bookingInfo['passenger_location']['state'] ),
+            'from_country' => strtolower( $bookingInfo['passenger_location']['country'] ),
+            'to_city' => strtolower( $bookingInfo['destination_location']['city'] ),
+            'to_state' => strtolower( $bookingInfo['destination_location']['state'] ),
+            'to_country' => strtolower( $bookingInfo['destination_location']['country'] ),
+        );
+        if( ! $rate = TaxiApp_Rate::getInstance()->selectOne( null, $cityBased ) )
+        {
+            //  State level
+            $cityBased['from_city'] = '*';
+            $cityBased['to_city'] = '*';
 
-        $totalRate = $timeRate + $distanceRate;
-        return $totalRate;
+            if( ! $rate = TaxiApp_Rate::getInstance()->selectOne( null, $cityBased ) )
+            {
+                //  country level
+                $cityBased['from_state'] = '*';
+                $cityBased['to_state'] = '*';
+    
+                if( ! $rate = TaxiApp_Rate::getInstance()->selectOne( null, $cityBased, array( 'sss ' ) ) )
+                {        
+                    $routeInfo = $bookingInfo['route_info']['routes'][0]['legs'][0];
+                    $timeRate = TaxiApp_Settings::retrieve( "time_rate" ) * $routeInfo['duration']['value'];
+                    $distanceRate = TaxiApp_Settings::retrieve( "distance_rate" ) * $routeInfo['distance']['value'];
+        
+                    $rate = $timeRate + $distanceRate;
+                }        
+            }
+        }
+        if( is_array( $rate ) && isset( $rate['rate'] ) )
+        {
+            return $rate['rate'];
+        }
+        return $rate;
     }
 
     public function updateBookingInfo(& $values, $data = array() )

@@ -101,6 +101,13 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 			);
 		}
 
+		if( $unpaid = TaxiApp_Booking::getInstance()->select( null, $where + array( 'paid' => '' ) ) )
+		{
+			$listOptions += array( 
+				'Unpaid' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_List/?view_type=unpaid\', \'' . $this->getObjectName() . '\' );" title="">Unpaid ( ' . count( $unpaid ) . ' )</a>',    
+			);
+		}
+
 		$listOptions += array( 
 			'Creator' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Manual/\', \'' . $this->getObjectName() . '\' );" title="">Manual Booking</a>',    
 		);
@@ -118,6 +125,11 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 				$allBookings = $pendingDeliveries;
 				$list->listTitle = 'Pending Deliveries';
 			}
+			if( $_REQUEST['view_type'] == 'unpaid' )
+			{
+				$allBookings = $unpaid;
+				$list->listTitle = 'Unpaid Deliveries';
+			}
 			$listOptions = array( 'Creator' => '' );
 		}
 
@@ -130,11 +142,12 @@ class TaxiApp_Booking_List extends TaxiApp_Booking_Abstract
 
 		$listInfo = 			array(
 		'Booking ID' => array( 'field' => 'booking_id', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-		'destination' => array( 'field' => 'destination', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+		'to' => array( 'field' => 'destination', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
 		'Booked' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'Pick up' => array( 'field' => 'pickup_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'Delivery' => array( 'field' => 'delivery_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
 		'status' => array( 'field' => 'status', 'value' =>  '%FIELD%', 'value_representation' =>  self::getStatusMeaning() ), 
+		'paid' => array( 'field' => 'paid', 'value' =>  '%FIELD%' ), 
 		'<a style="font-size:smaller;" rel="shadowbox;changeElementId=' . $this->getObjectName() . '" href="' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Booking_Info/?' . $this->getIdColumn() . '=%KEY%">Details</a>', 
 		);
 

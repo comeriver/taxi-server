@@ -67,8 +67,16 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             $this->_objectData['goodnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick-up booking successful. Connecting '  . self::getTerm( 'Trip' ) . ' in a moment...';
             $this->_objectData += $bookingInfo;
 
-            $this->setViewContent( '<h2 class="goodnews">Booking Confirmed</h2>', true );
-            $this->setViewContent( '<p style="margin:1em 0;">' . $this->_objectData['goodnews'] . ' <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></p>' );
+            $this->setViewContent( '<h3 class="goodnews">Booking Confirmed</h3>', true );
+            $this->setViewContent( '
+            <p style="margin:1em 0;">
+            Next Steps...
+            <ul>
+                <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay/?booking_id=' . $bookingInfo['insert_id'] . '">Make Payment Online</a></li>
+                <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></li>
+            </ul>
+            </p>' 
+            );
         
 			//	Notify Admin
 			$mailInfo = array();

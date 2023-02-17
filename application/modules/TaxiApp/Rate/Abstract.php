@@ -65,7 +65,7 @@ class TaxiApp_Rate_Abstract extends PageCarton_Widget
         
 		$fieldset = new Ayoola_Form_Element;
 
-        $rateServices = TaxiApp_Rate_RateService::getInstance()->select( 'rateservice_name', null, array( 'row_id_column' => 'rateservice_id' ) );
+        $rateServices = TaxiApp_Rate_RateService::getInstance()->select( 'rateservice_name', null, array( 'row_id_column' => 'rateservice_id' ) ); 
         
         $fieldset->addElement( array( 'name' => 'rate', 'type' => 'InputText', 'value' => @$values['rate'] ? : '*' ) );         
         $fieldset->addElement( array( 'name' => 'rateservice_id', 'label' => 'Service Type', 'type' => 'Select', 'value' => @$values['rateservice_id'] ? : @$_REQUEST['rateservice_id'] ), $rateServices );         

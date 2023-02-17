@@ -14,7 +14,7 @@
       <TABLE_FIELD FIELD_KEY="option_id"><![CDATA[0-1674764909-1]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="__user_agent_id"><![CDATA[]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="option_name"><![CDATA[Rates]]></TABLE_FIELD>
-      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/?name=TaxiApp_RateService_List]]></TABLE_FIELD>
+      <TABLE_FIELD FIELD_KEY="url"><![CDATA[/pc-admin/?name=TaxiApp_Rate_RateService_List]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="menu_id"><![CDATA[9]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="link_options"><![CDATA[a:2:{i:0;s:9:&quot;logged_in&quot;;i:1;s:10:&quot;logged_out&quot;;}]]></TABLE_FIELD>
       <TABLE_FIELD FIELD_KEY="auth_level"><![CDATA[a:2:{i:0;s:2:&quot;98&quot;;i:1;s:2:&quot;99&quot;;}]]></TABLE_FIELD>

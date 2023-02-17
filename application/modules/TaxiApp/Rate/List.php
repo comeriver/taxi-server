@@ -52,8 +52,7 @@ class TaxiApp_Rate_List extends TaxiApp_Rate_Abstract
 			{
 				$this->_dbWhereClause['rateservice_id'] = $_REQUEST['rateservice_id'];
 				$rateId = '&rateservice_id=' . $_REQUEST['rateservice_id'];
-				$rateService = ' (' . TaxiApp_Rate_RateService::getInstance()->selectOne( 'rateservice_name' ) . ')';
-				//var_export( TaxiApp_Rate_RateService::getInstance()->selectOne( 'rateservice_name' ) );
+				$rateService = ' (' . TaxiApp_Rate_RateService::getInstance()->selectOne( 'rateservice_name', array( 'rateservice_id' => $_REQUEST['rateservice_id'] ) ) . ')';
 
 			}
 

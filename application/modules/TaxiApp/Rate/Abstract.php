@@ -67,10 +67,10 @@ class TaxiApp_Rate_Abstract extends PageCarton_Widget
 
         $rateServices = TaxiApp_Rate_RateService::getInstance()->select( 'rateservice_name', null, array( 'row_id_column' => 'rateservice_id' ) ); 
         
-        $fieldset->addElement( array( 'name' => 'rate', 'type' => 'InputText', 'value' => @$values['rate'] ? : '*' ) );         
+        $fieldset->addElement( array( 'name' => 'rate', 'placeholder' => 'Enter amount... (numbers only) e.g. 100', 'type' => 'InputText', 'value' => @$values['rate'] ) );         
         $fieldset->addElement( array( 'name' => 'rateservice_id', 'label' => 'Service Type', 'type' => 'Select', 'value' => @$values['rateservice_id'] ? : @$_REQUEST['rateservice_id'] ), $rateServices );         
         $fieldset->addElement( array( 'name' => 'from_city', 'type' => 'InputText', 'value' => @$values['from_city'] ? : '*' ) );         
-        $fieldset->addElement( array( 'name' => 'to_city', 'type' => 'InputText', 'value' => @$values['to_city'] ) );         
+        $fieldset->addElement( array( 'name' => 'to_city', 'type' => 'InputText', 'value' => @$values['to_city'] ? : '*' ) );         
         $fieldset->addElement( array( 'name' => 'from_lga', 'type' => 'InputText', 'value' => @$values['from_lga'] ? : '*' ) );         
         $fieldset->addElement( array( 'name' => 'to_lga', 'type' => 'InputText', 'value' => @$values['to_lga'] ? : '*' ) );         
         $fieldset->addElement( array( 'name' => 'from_state', 'type' => 'InputText', 'value' => @$values['from_state'] ) );         

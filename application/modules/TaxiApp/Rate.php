@@ -25,7 +25,7 @@ class TaxiApp_Rate extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.0';  
+    protected $_tableVersion = '0.1';  
 
     /**
      * Table data types and declaration
@@ -37,6 +37,8 @@ class TaxiApp_Rate extends PageCarton_Table
   'rate' => 'INPUTTEXT',
   'from_city' => 'INPUTTEXT',
   'to_city' => 'INPUTTEXT',
+  'from_lga' => 'INPUTTEXT',
+  'to_lga' => 'INPUTTEXT',
   'from_state' => 'INPUTTEXT',
   'to_state' => 'INPUTTEXT',
   'from_country' => 'INPUTTEXT',

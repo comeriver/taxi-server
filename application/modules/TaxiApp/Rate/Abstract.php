@@ -61,11 +61,19 @@ class TaxiApp_Rate_Abstract extends PageCarton_Widget
 		//	Form to create a new page
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->submitValue = $submitValue ;
-//		$form->oneFieldSetAtATime = true;
 
+        
 		$fieldset = new Ayoola_Form_Element;
-	//	$fieldset->placeholderInPlaceOfLabel = false;       
-        $fieldset->addElement( array( 'name' => 'rate', 'type' => 'InputText', 'value' => @$values['rate'] ) );         $fieldset->addElement( array( 'name' => 'from_city', 'type' => 'InputText', 'value' => @$values['from_city'] ) );         $fieldset->addElement( array( 'name' => 'to_city', 'type' => 'InputText', 'value' => @$values['to_city'] ) );         $fieldset->addElement( array( 'name' => 'from_state', 'type' => 'InputText', 'value' => @$values['from_state'] ) );         $fieldset->addElement( array( 'name' => 'to_state', 'type' => 'InputText', 'value' => @$values['to_state'] ) );         $fieldset->addElement( array( 'name' => 'from_country', 'type' => 'InputText', 'value' => @$values['from_country'] ) );         $fieldset->addElement( array( 'name' => 'to_country', 'type' => 'InputText', 'value' => @$values['to_country'] ) ); 
+
+        $fieldset->addElement( array( 'name' => 'rate', 'type' => 'InputText', 'value' => @$values['rate'] ? : '*' ) );         
+        $fieldset->addElement( array( 'name' => 'from_city', 'type' => 'InputText', 'value' => @$values['from_city'] ? : '*' ) );         
+        $fieldset->addElement( array( 'name' => 'to_city', 'type' => 'InputText', 'value' => @$values['to_city'] ) );         
+        $fieldset->addElement( array( 'name' => 'from_lga', 'type' => 'InputText', 'value' => @$values['from_lga'] ? : '*' ) );         
+        $fieldset->addElement( array( 'name' => 'to_lga', 'type' => 'InputText', 'value' => @$values['to_lga'] ? : '*' ) );         
+        $fieldset->addElement( array( 'name' => 'from_state', 'type' => 'InputText', 'value' => @$values['from_state'] ) );         
+        $fieldset->addElement( array( 'name' => 'to_state', 'type' => 'InputText', 'value' => @$values['to_state'] ) );         
+        $fieldset->addElement( array( 'name' => 'from_country', 'type' => 'InputText', 'value' => @$values['from_country'] ) );         
+        $fieldset->addElement( array( 'name' => 'to_country', 'type' => 'InputText', 'value' => @$values['to_country'] ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

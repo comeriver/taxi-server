@@ -1,0 +1,936 @@
+<?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: includes.php	Friday 17th of February 2023 12:12:30 PM	 $ 
+*/
+//	Template Content ?>
+
+                    <?php 
+
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1676635950 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1676635950 )
+                            foreach( $x_1676635950 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /layout/pc_layout_miniblog/template
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: template.php	Wednesday 30th of November 2022 02:13:23 PM	ayoola@ayoo.la $ 
+*/
+//	Template Content ?>
+
+                        <?php 
+                            if
+                            ( 
+                                $x_1669817603 = Ayoola_Filter_LayoutIdToPath
+                                ::getThemeIncludeFile( 'pc_layout_miniblog', array( 'path_blacklist' => '/sites/default/application', 'always_blacklist' => true ) ) 
+                            )
+                            {
+                                //    PageCarton_Widget::v( '/sites/default/application' );
+                                //    PageCarton_Widget::v( $x_1669817603 );
+                                include_once $x_1669817603;
+                            }
+                        ?>
+                         <?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /default-layout
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: default-layout.php	Thursday 24th of November 2022 05:31:44 PM	 $ 
+*/
+//	Template Content ?>
+
+                    <?php 
+
+                            //	ADDED TO CHECK WITH CACHE_DIR TOO BECAUSE OF EDITING THEME PAGES
+                            //	THEY WON'T HAVE CORRECT APPDIR
+                        if
+                        ( 
+
+                            $x_1669311104 = Ayoola_Filter_LayoutIdToPath::getThemeIncludeFile( 'pc_layout_miniblog', stripos( __FILE__, Ayoola_Application::getDomainSettings( APPLICATION_DIR ) ) !== false || stripos( __FILE__,CACHE_DIR ) !== false ? array( 'prioritize_my_copy' => true, 'multiple' => true,  ) : array( 'path_blacklist' => @array_pop( explode( PC_BASE, Ayoola_Application::getDomainSettings( APPLICATION_PATH ) ) ), 'multiple' => true ) ) 
+                        )
+                        {
+
+                            if( $x_1669311104 )
+                            foreach( $x_1669311104 as $each )
+                            {	
+                                include_once $each;
+                            }
+                        }
+
+                    ?>
+                     <?php
+/**
+* PageCarton Page Generator
+*
+* LICENSE
+*
+* @category PageCarton
+* @package /layout/pc_layout_miniblog/template
+* @generated Ayoola_Page_Editor_Layout
+* @copyright  Copyright (c) PageCarton. (http://www.PageCarton.com)
+* @license    http://www.PageCarton.com/license.txt
+* @version $Id: template.php	Thursday 24th of November 2022 05:28:45 PM	 $ 
+*/
+//	Template Content ?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+<?php include_once( LAYOUT_PATH . DS . 'htmlHeader' . TPL ) ?>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700%7CPlayfair+Display:400,700,900" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/magnific-popup.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/jquery-ui.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/aos.css">
+
+    <link rel="stylesheet" href="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/css/style.css"> 
+  </head>
+  <body data-pc-section-name="body">
+<?php include_once( LAYOUT_PATH . DS . 'header' . TPL ) ?>
+
+  <div class="site-wrap" data-pc-section-autonamed="1" data-pc-section-name="pc-body-1">
+
+    <?php
+//pc_body_2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_2 /default-layout Begins Here
+
+					if( empty( $_f3f9fee76ddaa947e1eaaebbcdf3739a ) || ! is_object( $_f3f9fee76ddaa947e1eaaebbcdf3739a ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_f3f9fee76ddaa947e1eaaebbcdf3739a, '' );
+
+					
+//pc_body_2 /default-layout Ends Here
+?><?php
+//pc_body_2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_2 / Begins Here
+
+					if( empty( $_14cf13320e5e486eb28fdb71fce33469 ) || ! is_object( $_14cf13320e5e486eb28fdb71fce33469 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_14cf13320e5e486eb28fdb71fce33469, '' );
+
+					
+//pc_body_2 / Ends Here
+?>
+
+    <?php
+//pc_body_3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+					if( empty( $_39ffedcc9aba2e82f64c0faea7d3e115 ) || ! is_object( $_39ffedcc9aba2e82f64c0faea7d3e115 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_39ffedcc9aba2e82f64c0faea7d3e115, '' );
+
+					
+//pc_body_3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_3 /default-layout Begins Here
+
+					if( empty( $_09609e0780045d25f4dbd93040ef9d82 ) || ! is_object( $_09609e0780045d25f4dbd93040ef9d82 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_09609e0780045d25f4dbd93040ef9d82, '' );
+
+					
+//pc_body_3 /default-layout Ends Here
+?><?php
+//pc_body_3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_3 / Begins Here
+
+					if( empty( $_1e9eee7adc49a845735c0c3c00ab8a7e ) || ! is_object( $_1e9eee7adc49a845735c0c3c00ab8a7e ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_1e9eee7adc49a845735c0c3c00ab8a7e, '' );
+
+					
+//pc_body_3 / Ends Here
+?><?php
+//oneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_oneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//oneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//oneness /default-layout Begins Here
+
+//oneness /default-layout Ends Here
+?><?php
+//oneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_oneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//oneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//oneness / Begins Here
+
+//oneness / Ends Here
+?><section data-pc-all-sections="1" class="container">	
+									<div class="">
+										<div class="row">
+											<div class="pc_page_layout_grid col-md-12 12u">
+												<?php
+//middlebar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_middlebar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//middlebar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//middlebar /default-layout Begins Here
+
+//middlebar /default-layout Ends Here
+?><?php
+//middlebar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_middlebar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//middlebar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//middlebar / Begins Here
+
+//middlebar / Ends Here
+?>
+										   </div>
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//twosome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome1 /default-layout Begins Here
+
+//twosome1 /default-layout Ends Here
+?><?php
+//twosome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome1 / Begins Here
+
+//twosome1 / Ends Here
+?>
+											</div>
+											<div class="pc_page_layout_grid col-sm-6 6u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//twosome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome2 /default-layout Begins Here
+
+//twosome2 /default-layout Ends Here
+?><?php
+//twosome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_twosome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//twosome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//twosome2 / Begins Here
+
+//twosome2 / Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)"> 
+												<?php
+//threesome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome1 /default-layout Begins Here
+
+//threesome1 /default-layout Ends Here
+?><?php
+//threesome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome1 / Begins Here
+
+//threesome1 / Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//threesome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome2 /default-layout Begins Here
+
+//threesome2 /default-layout Ends Here
+?><?php
+//threesome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome2 / Begins Here
+
+//threesome2 / Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//threesome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome3 /default-layout Begins Here
+
+//threesome3 /default-layout Ends Here
+?><?php
+//threesome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_threesome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//threesome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//threesome3 / Begins Here
+
+//threesome3 / Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome1 /default-layout Begins Here
+
+//foursome1 /default-layout Ends Here
+?><?php
+//foursome1 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome1 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome1 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome1 / Begins Here
+
+//foursome1 / Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome2 /default-layout Begins Here
+
+//foursome2 /default-layout Ends Here
+?><?php
+//foursome2 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome2 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome2 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome2 / Begins Here
+
+//foursome2 / Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-3 3u 6u(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//foursome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome3 /default-layout Begins Here
+
+//foursome3 /default-layout Ends Here
+?><?php
+//foursome3 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome3 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome3 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome3 / Begins Here
+
+//foursome3 / Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-3 3u 6u$(medium) 12u$(xsmall) 12u$(mobile)">    
+												<?php
+//foursome4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome4 /default-layout Begins Here
+
+//foursome4 /default-layout Ends Here
+?><?php
+//foursome4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_foursome4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//foursome4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//foursome4 / Begins Here
+
+//foursome4 / Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//leftbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbar /default-layout Begins Here
+
+//leftbar /default-layout Ends Here
+?><?php
+//leftbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbar / Begins Here
+
+//leftbar / Ends Here
+?>
+										   </div>
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//leftbarright /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbarright as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbarright /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbarright /default-layout Begins Here
+
+//leftbarright /default-layout Ends Here
+?><?php
+//leftbarright /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_leftbarright as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//leftbarright /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//leftbarright / Begins Here
+
+//leftbarright / Ends Here
+?>
+											</div> 
+										</div> 
+										<div class="row">
+											<div class="pc_page_layout_grid col-sm-8 8u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//rightbarleft /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbarleft as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbarleft /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbarleft /default-layout Begins Here
+
+//rightbarleft /default-layout Ends Here
+?><?php
+//rightbarleft /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbarleft as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbarleft /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbarleft / Begins Here
+
+//rightbarleft / Ends Here
+?>
+											</div> 
+											<div class="pc_page_layout_grid col-sm-4 4u 12u$(medium) 12u$(xsmall) 12u$(mobile)">
+												<?php
+//rightbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbar /default-layout Begins Here
+
+//rightbar /default-layout Ends Here
+?><?php
+//rightbar /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_rightbar as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//rightbar /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//rightbar / Begins Here
+
+//rightbar / Ends Here
+?>
+											</div>   
+										</div> 
+									</div> 
+									</section><?php
+//lastoneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_lastoneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//lastoneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//lastoneness /default-layout Begins Here
+
+//lastoneness /default-layout Ends Here
+?><?php
+//lastoneness /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_lastoneness as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//lastoneness /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//lastoneness / Begins Here
+
+//lastoneness / Ends Here
+?>    
+
+    <?php
+//pc_body_4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_4 /default-layout Begins Here
+
+					if( empty( $_1a913aa2388ac4f57f40ce71888d32ba ) || ! is_object( $_1a913aa2388ac4f57f40ce71888d32ba ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_1a913aa2388ac4f57f40ce71888d32ba, '' );
+
+					
+//pc_body_4 /default-layout Ends Here
+?><?php
+//pc_body_4 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_4 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_4 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_4 / Begins Here
+
+					if( empty( $_5d3c2150c5ebf1182486021a118defec ) || ! is_object( $_5d3c2150c5ebf1182486021a118defec ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_5d3c2150c5ebf1182486021a118defec, '' );
+
+					
+//pc_body_4 / Ends Here
+?>
+
+    <?php
+//pc_body_5 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_5 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_5 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_5 /default-layout Begins Here
+
+//pc_body_5 /default-layout Ends Here
+?><?php
+//pc_body_5 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_5 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_5 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_5 / Begins Here
+
+					if( empty( $_f10e928a6ea4c72bb7a16d3863414a98 ) || ! is_object( $_f10e928a6ea4c72bb7a16d3863414a98 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_f10e928a6ea4c72bb7a16d3863414a98, '' );
+
+					
+//pc_body_5 / Ends Here
+?>
+
+    <?php
+//pc_body_6 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_6 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_6 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_6 /default-layout Begins Here
+
+//pc_body_6 /default-layout Ends Here
+?><?php
+//pc_body_6 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_6 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_6 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_6 / Begins Here
+
+					if( empty( $_a696fda621b99149e379eaa518fa1a8a ) || ! is_object( $_a696fda621b99149e379eaa518fa1a8a ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_a696fda621b99149e379eaa518fa1a8a, '' );
+
+					
+//pc_body_6 / Ends Here
+?>
+
+    <?php
+//pc_body_7 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_7 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_7 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_7 /default-layout Begins Here
+
+//pc_body_7 /default-layout Ends Here
+?><?php
+//pc_body_7 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_7 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_7 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_7 / Begins Here
+
+					if( empty( $_f4a39728c3cf592b188221dc89de90f6 ) || ! is_object( $_f4a39728c3cf592b188221dc89de90f6 ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_f4a39728c3cf592b188221dc89de90f6, '' );
+
+					
+//pc_body_7 / Ends Here
+?>
+
+    <?php
+//pc_body_8 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_8 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+					if( empty( $_ae0ff9ef789ab70f1331b346bc29d7ec ) || ! is_object( $_ae0ff9ef789ab70f1331b346bc29d7ec ) )
+					{
+						//Ayoola_Page_Layout_Abstract::refreshThemePage(  );
+					}
+					echo Ayoola_Object_Wrapper_Abstract::wrap( $_ae0ff9ef789ab70f1331b346bc29d7ec, '' );
+
+					
+//pc_body_8 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_8 /default-layout Begins Here
+
+//pc_body_8 /default-layout Ends Here
+?><?php
+//pc_body_8 /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_body_8 as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_body_8 /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_body_8 / Begins Here
+
+//pc_body_8 / Ends Here
+?>
+
+  </div>
+
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-3.3.1.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery-ui.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/popper.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/bootstrap.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/owl.carousel.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.stellar.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.countdown.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/jquery.magnific-popup.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/bootstrap-datepicker.min.js"></script>
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/aos.js"></script>
+
+  <script src="<?php echo Ayoola_Application::getUrlPrefix(); ?>/layout/pc_layout_miniblog/js/main.js"></script>
+
+  <?php include_once( LAYOUT_PATH . DS . 'footerJs' . TPL ) ?><?php include_once( LAYOUT_PATH . DS . 'footer' . TPL ) ?><?php
+//pc_section_after_js /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_section_after_js as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_section_after_js /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_section_after_js /default-layout Begins Here
+
+//pc_section_after_js /default-layout Ends Here
+?><?php
+//pc_section_after_js /layout/pc_layout_miniblog/template Begins Here
+
+                foreach( $_sitePageWidget_pc_section_after_js as $eachSitePageWidget )
+                {
+                    echo $eachSitePageWidget->view();
+                }
+                
+//pc_section_after_js /layout/pc_layout_miniblog/template Ends Here
+?><?php
+//pc_section_after_js / Begins Here
+
+//pc_section_after_js / Ends Here
+?>
+<script type="application/json">
+              {
+                "class": "Application_User_AdminCreator",
+                "new_site_setup": true
+              }
+            </script>
+<script type="application/json">
+        {"parameter_suffix":"[0]","add_a_new_post[0]":"5","trending":"50","class":"Application_Article_ShowAll"}
+        </script>
+</body>
+</html>

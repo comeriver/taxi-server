@@ -43,34 +43,34 @@ class TaxiApp_Rate_List extends TaxiApp_Rate_Abstract
      */
     protected function createList()
     {
-		require_once 'Ayoola/Paginator.php';
-		$list = new Ayoola_Paginator();
-		$list->pageName = $this->getObjectName();
-		$list->listTitle = self::getObjectTitle();
-		$list->setData( $this->getDbData() );
-		$list->setListOptions( 
-								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
-									) 
-							);
-		$list->setKey( $this->getIdColumn() );
-		$list->setNoRecordMessage( 'No rate data has been added yet.' );
-		
-		$list->createList
-		(
-			array(
-                    'rate' => array( 'field' => 'rate', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
-                    'from_city' => array( 'field' => 'from_city', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
-                    'to_city' => array( 'field' => 'to_city', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
-                    'from_state' => array( 'field' => 'from_state', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
-                    'to_state' => array( 'field' => 'to_state', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
-                    'from_country' => array( 'field' => 'from_country', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'to_country' => array( 'field' => 'to_country', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
-                    'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
-                    '%FIELD% <a style="font-size:smaller;"  href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Rate_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
-                    '%FIELD% <a style="font-size:smaller;" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Rate_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
-				)
-		);
-		return $list;
+      require_once 'Ayoola/Paginator.php';
+      $list = new Ayoola_Paginator();
+      $list->pageName = $this->getObjectName();
+      $list->listTitle = self::getObjectTitle();
+      $list->setData( $this->getDbData() );
+      $list->setListOptions( 
+                  array( 
+                //			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
+                    ) 
+                );
+      $list->setKey( $this->getIdColumn() );
+      $list->setNoRecordMessage( 'No rate data has been added yet.' );
+      
+      $list->createList
+      (
+        array(
+                      'rate' => array( 'field' => 'rate', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                      'from_city' => array( 'field' => 'from_city', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                      'to_city' => array( 'field' => 'to_city', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                      'from_state' => array( 'field' => 'from_state', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                      'to_state' => array( 'field' => 'to_state', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     
+                      'from_country' => array( 'field' => 'from_country', 'value' =>  '%FIELD%', 'filter' =>  '' ),                     'to_country' => array( 'field' => 'to_country', 'value' =>  '%FIELD%', 'filter' =>  '' ), 
+                      'Added' => array( 'field' => 'creation_time', 'value' =>  '%FIELD%', 'filter' =>  'Ayoola_Filter_Time' ), 
+                      '%FIELD% <a style="font-size:smaller;"  href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Rate_Editor/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>', 
+                      '%FIELD% <a style="font-size:smaller;" href="javascript:" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Rate_Delete/?' . $this->getIdColumn() . '=%KEY%\', \'' . $this->getObjectName() . '\' );"><i class="fa fa-trash" aria-hidden="true"></i></a>', 
+          )
+      );
+      return $list;
     } 
 	// END OF CLASS
 }

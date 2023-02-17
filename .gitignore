@@ -15,3 +15,4 @@ application/databases/Ayoola/Access/localuser.xml
 application/databases/Places/table.xml
 application/databases/Application/settings.xml
 application/databases/NativeApp/Authenticate/otptable.xml
+.vscode/

@@ -28,6 +28,12 @@
         "\/TaxiApp\/Rate\/Delete.php",
         "\/TaxiApp\/Rate\/Editor.php",
         "\/TaxiApp\/Rate\/List.php",
+        "\/TaxiApp\/Rate\/RateService.php",
+        "\/TaxiApp\/Rate\/RateService\/Abstract.php",
+        "\/TaxiApp\/Rate\/RateService\/Creator.php",
+        "\/TaxiApp\/Rate\/RateService\/Delete.php",
+        "\/TaxiApp\/Rate\/RateService\/Editor.php",
+        "\/TaxiApp\/Rate\/RateService\/List.php",
         "\/TaxiApp\/Settings.php"
     ],
     "settings_class": "TaxiApp_Settings",
@@ -37,6 +43,7 @@
         "\/Ayoola\/Page\/Menu\/option.xml",
         "\/PageCarton\/hook.xml"
     ],
+    "documents": null,
     "dependencies": [
         "\/2020\/06\/11\/nativeapp-server-api.html"
     ],
@@ -69,6 +76,12 @@
         "\/modules\/TaxiApp\/Rate\/Delete.php",
         "\/modules\/TaxiApp\/Rate\/Editor.php",
         "\/modules\/TaxiApp\/Rate\/List.php",
+        "\/modules\/TaxiApp\/Rate\/RateService.php",
+        "\/modules\/TaxiApp\/Rate\/RateService\/Abstract.php",
+        "\/modules\/TaxiApp\/Rate\/RateService\/Creator.php",
+        "\/modules\/TaxiApp\/Rate\/RateService\/Delete.php",
+        "\/modules\/TaxiApp\/Rate\/RateService\/Editor.php",
+        "\/modules\/TaxiApp\/Rate\/RateService\/List.php",
         "\/modules\/TaxiApp\/Settings.php",
         "\/databases\/Ayoola\/Access\/authlevel.xml",
         "\/databases\/Ayoola\/Access\/__\/authlevel",

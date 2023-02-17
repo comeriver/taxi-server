@@ -6,10 +6,10 @@
  * LICENSE
  *
  * @category   PageCarton
- * @package    TaxiApp_Rate
+ * @package    TaxiApp_Rate_RateService
  * @copyright  Copyright (c) 2023 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: Rate.php Thursday 26th of January 2023 06:42PM ayoola@ayoo.la $
+ * @version    $Id: RateService.php Friday 17th of February 2023 12:53PM ayoola@ayoo.la $
  */
 
 /**
@@ -17,7 +17,7 @@
  */
 
 
-class TaxiApp_Rate extends PageCarton_Table
+class TaxiApp_Rate_RateService extends PageCarton_Table
 {
 
     /**
@@ -25,7 +25,7 @@ class TaxiApp_Rate extends PageCarton_Table
      *
      * @param string
      */
-    protected $_tableVersion = '0.2';  
+    protected $_tableVersion = '0.1';  
 
     /**
      * Table data types and declaration
@@ -34,16 +34,8 @@ class TaxiApp_Rate extends PageCarton_Table
      * @param array
      */
 	protected $_dataTypes = array (
-  'rate' => 'INPUTTEXT',
-  'rateservice_id' => 'INPUTTEXT',
-  'from_city' => 'INPUTTEXT',
-  'to_city' => 'INPUTTEXT',
-  'from_lga' => 'INPUTTEXT',
-  'to_lga' => 'INPUTTEXT',
-  'from_state' => 'INPUTTEXT',
-  'to_state' => 'INPUTTEXT',
-  'from_country' => 'INPUTTEXT',
-  'to_country' => 'INPUTTEXT',
+  'rateservice_name' => 'INPUTTEXT',
+  'rateservice_description' => 'INPUTTEXT',
 );
 
 

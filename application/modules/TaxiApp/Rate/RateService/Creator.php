@@ -6,7 +6,7 @@
  * LICENSE
  *
  * @category   PageCarton
- * @package    TaxiApp_Rate_Creator
+ * @package    TaxiApp_Rate_RateService_Creator
  * @copyright  Copyright (c) 2017 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
  * @version    $Id: Creator.php Wednesday 20th of December 2017 03:23PM ayoola@ayoo.la $
@@ -16,7 +16,7 @@
  * @see PageCarton_Widget
  */
 
-class TaxiApp_Rate_Creator extends TaxiApp_Rate_Abstract
+class TaxiApp_Rate_RateService_Creator extends TaxiApp_Rate_RateService_Abstract
 {
 	
     /**
@@ -24,7 +24,7 @@ class TaxiApp_Rate_Creator extends TaxiApp_Rate_Abstract
      * 
      * @var string 
      */
-	protected static $_objectTitle = 'Add new rate for service';
+	protected static $_objectTitle = 'Add new rate Service'; 
 
     /**
      * Performs the whole widget running process
@@ -35,18 +35,11 @@ class TaxiApp_Rate_Creator extends TaxiApp_Rate_Abstract
 		try
 		{ 
             //  Code that runs the widget goes here...
-			$this->createForm( 'Submit...', 'Add new rate' );
+			$this->createForm( 'Submit...', 'Add new rate Service' );
 			$this->setViewContent( $this->getForm()->view() );
 
 			if( ! $values = $this->getForm()->getValues() ){ return false; }
 			
-			$values['from_city'] = strtolower( $values['from_city'] );
-			$values['to_city'] = strtolower( $values['to_city'] );
-			$values['from_state'] = strtolower( $values['from_state'] );
-			$values['to_state'] = strtolower( $values['to_state'] );
-			$values['from_country'] = strtolower( $values['from_country'] );
-			$values['to_country'] = strtolower( $values['to_country'] );
-
 			//	Notify Admin
 			$mailInfo = array();
 			$mailInfo['subject'] = __CLASS__;
@@ -55,14 +48,17 @@ class TaxiApp_Rate_Creator extends TaxiApp_Rate_Abstract
 			';
 			try
 			{
+
 				@Ayoola_Application_Notification::mail( $mailInfo );
 			}
 			catch( Ayoola_Exception $e ){ null; }
+
 			if( $this->insertDb( $values ) )
 			{ 
-				$this->setViewContent(  '' . self::__( '<div class="goodnews">Rate added successfully. </div>' ) . '', true  ); 
+				$this->setViewContent(  '' . self::__( '<div class="goodnews">Added successfully. </div>' ) . '', true  ); 
 			}
-            
+
+			
 
 
             // end of widget process

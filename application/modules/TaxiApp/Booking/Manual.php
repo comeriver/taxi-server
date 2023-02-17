@@ -43,6 +43,28 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
 		{ 
             //  Code that runs the widget goes here...
 
+            if( ! empty( $_REQUEST['booking_id'] ) && ! empty( $_REQUEST['rateservice_id'] ) )
+            {
+
+                //  update service id
+                TaxiApp_Booking::getInstance()->update( array( 'rateservice_id' => $_REQUEST['rateservice_id'] ), array( 'booking_id' => $_REQUEST['booking_id'] ) );
+
+                $this->setViewContent( '<h3 class="goodnews">Booking Confirmed</h3>', true );
+
+                $this->setViewContent( '
+                <p style="margin:1em 0;">
+                Next Steps...
+                <ul>
+                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay/?booking_id=' . $bookingInfo['insert_id'] . '">Make Payment Online</a></li>
+                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></li>
+                </ul>
+                </p>' 
+                );
+
+                return true;
+
+
+            }
 
             $this->createForm();
 
@@ -64,19 +86,29 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                 $this->setViewContent( $this->getForm()->view() );
                 return false;
             }
+
             $this->_objectData['goodnews'] = ''  . self::getTerm( 'Passenger' ) . ' pick-up booking successful. Connecting '  . self::getTerm( 'Trip' ) . ' in a moment...';
             $this->_objectData += $bookingInfo;
 
-            $this->setViewContent( '<h3 class="goodnews">Booking Confirmed</h3>', true );
-            $this->setViewContent( '
-            <p style="margin:1em 0;">
-            Next Steps...
-            <ul>
-                <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay/?booking_id=' . $bookingInfo['insert_id'] . '">Make Payment Online</a></li>
-                <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></li>
-            </ul>
-            </p>' 
-            );
+
+            $this->setViewContent( '<h3 class="goodnews">Select Service Options</h3>', true );
+
+            
+            if( $serviceOptions = self::calcRateOptions( $bookingInfo + $values ) )
+            {
+                $html = '<form action="?booking_id=' . $bookingInfo['booking_id'] .  '" >';
+
+                foreach( $serviceOptions as $serviceId => $service )
+                {
+                    $html .= '<input onchange="this.form.submit();" name="rateservice_id" type=radio id="' . $serviceId . '"> <label for"' . $serviceId . '"><b>' . $service['rateservice_name'] . '</b> <p>' . $service['rateservice_description'] . '</p></label>';
+                }
+
+
+                $html .= '</form>';
+                $this->setViewContent( $html, true );
+
+            }
+
         
 			//	Notify Admin
 			$mailInfo = array();
@@ -84,6 +116,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             $mailInfo['body'] = ''  . self::getTerm( 'Passenger' ) . ' booking for a '  . self::getTerm( 'Trip' ) . ' was just made and a pick-up location was set successfully. This is a confirmation of that booking. 
             
             <a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Track '  . self::getTerm( 'Trip' ) . ' Booking Info</a>';
+
 			try
 			{
 				@Ayoola_Application_Notification::mail( $mailInfo );

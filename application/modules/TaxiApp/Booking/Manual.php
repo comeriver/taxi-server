@@ -47,6 +47,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             {
 
                 //  update service id
+                //var_export( array( 'rateservice_id' => $_REQUEST['rateservice_id'] ) );
                 TaxiApp_Booking::getInstance()->update( array( 'rateservice_id' => $_REQUEST['rateservice_id'] ), array( 'booking_id' => $_REQUEST['booking_id'] ) );
 
                 $this->setViewContent( '<h3 class="goodnews">Booking Confirmed</h3>', true );
@@ -55,8 +56,8 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                 <p style="margin:1em 0;">
                 Next Steps...
                 <ul>
-                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay/?booking_id=' . $bookingInfo['insert_id'] . '">Make Payment Online</a></li>
-                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $bookingInfo['insert_id'] . '">Check Booking Info</a></li>
+                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Pay/?booking_id=' . $_REQUEST['booking_id'] . '">Make Payment Online</a></li>
+                    <li><a href="' . Ayoola_Application::getUrlPrefix() . '/widgets/TaxiApp_Booking_Info/?booking_id=' . $_REQUEST['booking_id'] . '">Check Booking Info</a></li>
                 </ul>
                 </p>' 
                 );
@@ -91,21 +92,45 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             $this->_objectData += $bookingInfo;
 
 
-            $this->setViewContent( '<h3 class="goodnews">Select Service Options</h3>', true );
+            //var_export( $values );
+
+            $this->setViewContent( '<h3 class="pc-notify-info">Select Service Options</h3>', true );
+
+            $this->setViewContent( '<p>
+            <br>
+            <b>Pick-up Address</b>: <br>' . $values['passenger_location']['name'] .  ' - ' . $values['passenger_location']['address'] .  '<br><br>
+            <b>Delivery Address</b>: <br>' . $values['destination_location']['name'] .  ' - ' . $values['destination_location']['address'] .  '
+            </p>' );
 
             
-            if( $serviceOptions = self::calcRateOptions( $bookingInfo + $values ) )
+            $serviceOptions = self::calcRateOptions( $bookingInfo + $values );
+
+
+            $currency = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
+
+            if( $serviceOptions )
             {
-                $html = '<form action="?booking_id=' . $bookingInfo['booking_id'] .  '" >';
+                $html = '<form method="post" action="?booking_id=' . $bookingInfo['booking_id'] .  '" >';
 
                 foreach( $serviceOptions as $serviceId => $service )
                 {
-                    $html .= '<input onchange="this.form.submit();" name="rateservice_id" type=radio id="' . $serviceId . '"> <label for"' . $serviceId . '"><b>' . $service['rateservice_name'] . '</b> <p>' . $service['rateservice_description'] . '</p></label>';
+
+                    $html .= '<label for="' . $serviceId . '" class="rateservice" style="display:block; margin: 1em 0; padding: 1em; cursor:pointer; background-color: #ccc; border-radius: 10px; border-color: #333; ">';
+                    $html .= '<input value="' . $serviceId . '" onchange="this.form.submit();" name="rateservice_id" type=radio id="' . $serviceId . '"> <div style="margin-left:1em; display:inline-block;"><b>' . $service['rateservice_name'] . ' - ' . $currency . $service['rate'] . '</b> 
+                    <div>' . $service['rateservice_description'] . '</div>
+                    </div>
+                    <br>';
+                    $html .= '</label>';
+
                 }
 
 
+
+
+                $html .= '<button type="submit">Confirm Booking</button>';
+
                 $html .= '</form>';
-                $this->setViewContent( $html, true );
+                $this->setViewContent( $html );
 
             }
 

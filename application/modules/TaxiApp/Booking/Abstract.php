@@ -86,20 +86,20 @@ class TaxiApp_Booking_Abstract extends TaxiApp
     /**
      * 
      */
-	public static function calcRateOptions( $bookingInfo )  
+	public static function calcRateOptions( $bookingInfo, $serviceIdSpecific = null)  
     {
 
         $where = null;
-        if( ! $bookingInfo['rateservice_id'] )
+        if( ! empty( $serviceIdSpecific ) )
         {
-            $where['rateservice_id'] = $bookingInfo['rateservice_id'];
+            $where['rateservice_id'] = $serviceIdSpecific;
         }
 
         $services = TaxiApp_Rate_RateService::getInstance()->select( null, $where, array( 'row_id_column' => 'rateservice_id' ) );
         
         foreach( $services as $serviceId => $service )
         {
-                        //  check city level rate 
+            //  check city level rate
             $cityBased = $rateLocation = array( 
                 'rateservice_id' => $serviceId,
                 'from_city' => strtolower( $bookingInfo['passenger_location']['city'] ),
@@ -213,7 +213,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
 
             if( is_array( $rate ) && isset( $rate['rate'] ) )
             {
-                return $rate['rate'];
+                $rate = $rate['rate'];
             }
 
             $services[$serviceId]['rate'] = $rate;
@@ -227,7 +227,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
      */
 	public static function calcRate( $bookingInfo )  
     {
-        $serviceOptions = self::calcRateOptions( $bookingInfo );
+        $serviceOptions = self::calcRateOptions( $bookingInfo, $bookingInfo['rateservice_id'] );
 
         $service = array_pop( $serviceOptions );
 
@@ -359,6 +359,7 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         {          
             if( $serviceOptions = self::calcRateOptions( $values ) )
             {
+                
                 $rates = array();
 
                 foreach( $serviceOptions as $serviceId => $service )

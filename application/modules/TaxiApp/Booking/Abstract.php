@@ -95,6 +95,12 @@ class TaxiApp_Booking_Abstract extends TaxiApp
             $where['rateservice_id'] = $serviceIdSpecific;
         }
 
+        //  we are booking specific service
+        if( ! empty( $bookingInfo['service_id'] ) )
+        {
+            $where['service_id'] = $bookingInfo['service_id'];
+        }
+
         $services = TaxiApp_Rate_RateService::getInstance()->select( null, $where, array( 'row_id_column' => 'rateservice_id' ) );
         
         foreach( $services as $serviceId => $service )
@@ -336,6 +342,13 @@ class TaxiApp_Booking_Abstract extends TaxiApp
         if( isset( $values['passenger_location']['name'] ) ) 
         {
             $preset = array( $values['passenger_location']['place_id'] => $values['passenger_location']['name'] . ', ' . $values['passenger_location']['address'] );
+        }
+
+        $serviceTypes = TaxiApp_Service::getInstance()->select( 'service_name', null, array( 'row_id_column' => 'service_id' ) );
+
+        if( $serviceTypes )
+        {
+            $fieldset->addElement( array( 'name' => 'service_id', 'label' => 'Select Service Type', 'type' => 'Radio', 'value' => @$values['service_id'] ? : @$_REQUEST['service_id'] ), $serviceTypes );
         }
 
         $fieldset->addElement( array( 'name' => 'pickup_place_id', 'label' => 'Set Pick-up Location', 'config' => array( 

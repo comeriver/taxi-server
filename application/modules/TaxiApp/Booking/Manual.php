@@ -46,6 +46,8 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             if( ! empty( $_REQUEST['booking_id'] ) && ! empty( $_REQUEST['rateservice_id'] ) )
             {
 
+                //  finalize booking for booking with active service id
+
                 //  update service id
                 //var_export( array( 'rateservice_id' => $_REQUEST['rateservice_id'] ) );
                 TaxiApp_Booking::getInstance()->update( array( 'rateservice_id' => $_REQUEST['rateservice_id'] ), array( 'booking_id' => $_REQUEST['booking_id'] ) );
@@ -92,8 +94,21 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             $this->_objectData += $bookingInfo;
 
 
-            //var_export( $values );
+            //  check if service have rate options
 
+            $instantRates = true;
+            if( ! empty( $values['service_id'] ) )
+            {
+                if( $serviceType = TaxiApp_Service::getInstance()->selectOne( null, array( 'service_id' => $values['service_id'] ) ) )
+                {
+                    if( in_array( 'no_instant_rates', $serviceType['service_options'] ) )
+                    {
+                        $instantRates = false;
+                    }
+                }
+            }
+
+            //var_export( $values );
             $this->setViewContent( '<h3 class="pc-notify-info">Select Service Options</h3>', true );
 
             $this->setViewContent( '<p>
@@ -102,38 +117,44 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             <b>Delivery Address</b>: <br>' . $values['destination_location']['name'] .  ' - ' . $values['destination_location']['address'] .  '
             </p>' );
 
-            
-            $serviceOptions = self::calcRateOptions( $bookingInfo + $values );
-
-
-            $currency = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
-
-            if( $serviceOptions )
+            if( ! $instantRates )
             {
-                $html = '<form method="post" action="?booking_id=' . $bookingInfo['booking_id'] .  '" >';
-
-                foreach( $serviceOptions as $serviceId => $service )
-                {
-
-                    $html .= '<label for="' . $serviceId . '" class="rateservice" style="display:block; margin: 1em 0; padding: 1em; cursor:pointer; background-color: #ccc; border-radius: 10px; border-color: #333; ">';
-                    $html .= '<input value="' . $serviceId . '" onchange="this.form.submit();" name="rateservice_id" type=radio id="' . $serviceId . '"> <div style="margin-left:1em; display:inline-block;"><b>' . $service['rateservice_name'] . ' - ' . $currency . $service['rate'] . '</b> 
-                    <div>' . $service['rateservice_description'] . '</div>
-                    </div>
-                    <br>';
-                    $html .= '</label>';
-
-                }
-
-
-
-
-                $html .= '<button type="submit">Confirm Booking</button>';
-
-                $html .= '</form>';
-                $this->setViewContent( $html );
-
+                $this->setViewContent( '<p>Our team will call you in a bit to provide you with a quote</p>',  );
             }
-
+            else
+            {
+                
+                $serviceOptions = self::calcRateOptions( $bookingInfo + $values );
+    
+                $currency = Application_Settings_Abstract::getSettings( 'Payments', 'default_currency' ) ? : '$';
+    
+                if( $serviceOptions )
+                {
+                    $html = '<form method="post" action="?booking_id=' . $bookingInfo['booking_id'] .  '" >';
+    
+                    foreach( $serviceOptions as $serviceId => $service )
+                    {
+    
+                        $html .= '<label for="' . $serviceId . '" class="rateservice" style="display:block; margin: 1em 0; padding: 1em; cursor:pointer; background-color: #ccc; border-radius: 10px; border-color: #333; ">';
+                        $html .= '<input value="' . $serviceId . '" onchange="this.form.submit();" name="rateservice_id" type=radio id="' . $serviceId . '"> <div style="margin-left:1em; display:inline-block;"><b>' . $service['rateservice_name'] . ' - ' . $currency . $service['rate'] . '</b> 
+                        <div>' . $service['rateservice_description'] . '</div>
+                        </div>
+                        <br>';
+                        $html .= '</label>';
+    
+                    }
+    
+    
+    
+    
+                    $html .= '<button type="submit">Confirm Booking</button>';
+    
+                    $html .= '</form>';
+                    $this->setViewContent( $html );
+    
+                }
+    
+            }
         
 			//	Notify Admin
 			$mailInfo = array();

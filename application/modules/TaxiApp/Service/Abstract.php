@@ -6,10 +6,10 @@
  * LICENSE
  *
  * @category   PageCarton
- * @package    TaxiApp_Rate_RateService_Abstract
+ * @package    TaxiApp_Service_Abstract
  * @copyright  Copyright (c) 2023 PageCarton (http://www.pagecarton.org)
  * @license    GNU General Public License version 2 or later; see LICENSE.txt
- * @version    $Id: Abstract.php Friday 17th of February 2023 12:53PM ayoola@ayoo.la $
+ * @version    $Id: Abstract.php Tuesday 18th of April 2023 09:56AM ayoola@ayoo.la $
  */
 
 /**
@@ -17,7 +17,7 @@
  */
 
 
-class TaxiApp_Rate_RateService_Abstract extends PageCarton_Widget
+class TaxiApp_Service_Abstract extends PageCarton_Widget
 {
 	
     /**
@@ -25,21 +25,21 @@ class TaxiApp_Rate_RateService_Abstract extends PageCarton_Widget
      * 
      * @var array
      */
-	protected $_identifierKeys = array( 'rateservice_id' );
+	protected $_identifierKeys = array( 'service_id' );
  	
     /**
      * The column name of the primary key
      *
      * @var string
      */
-	protected $_idColumn = 'rateservice_id';
+	protected $_idColumn = 'service_id';
 	
     /**
      * Identifier for the column to edit
      * 
      * @var string
      */
-	protected $_tableClass = 'TaxiApp_Rate_RateService';
+	protected $_tableClass = 'TaxiApp_Service';
 	
     /**
      * Access level for player. Defaults to everyone
@@ -62,18 +62,9 @@ class TaxiApp_Rate_RateService_Abstract extends PageCarton_Widget
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName(), 'data-not-playable' => true ) );
 		$form->submitValue = $submitValue ;
 
-
 		$fieldset = new Ayoola_Form_Element;
-
-        $serviceTypes = TaxiApp_Service::getInstance()->select( 'service_name', null, array( 'row_id_column' => 'service_id' ) );
-
-        if( $serviceTypes )
-        {
-            $fieldset->addElement( array( 'name' => 'service_id', 'label' => 'Service Type', 'type' => 'Select', 'value' => @$values['service_id'] ? : @$_REQUEST['service_id'] ), $serviceTypes );
-        }
-        $fieldset->addElement( array( 'name' => 'rateservice_name', 'label' => 'Service Rate Name', 'type' => 'InputText', 'value' => @$values['rateservice_name'] ) ); 
-        $fieldset->addElement( array( 'name' => 'rateservice_description', 'label' => 'Service Rate Description', 'type' => 'TextArea', 'value' => @$values['rateservice_description'] ) ); 
-
+        $fieldset->addElement( array( 'name' => 'service_name', 'type' => 'InputText', 'value' => @$values['service_name'] ) );         
+        $fieldset->addElement( array( 'name' => 'service_options', 'type' => 'Checkbox', 'value' => @$values['service_options'] ), array( 'no_instant_rates' => 'No instant rates, rates will be set via manual quotes' ) ); 
 
 		$fieldset->addLegend( $legend );
 		$form->addFieldset( $fieldset );   

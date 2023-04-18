@@ -50,7 +50,7 @@ class TaxiApp_Rate_RateService_List extends TaxiApp_Rate_RateService_Abstract
 		$list->setData( $this->getDbData() );
 		$list->setListOptions( 
 								array( 
-							//			'Sub Domains' => '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/Application_Domain_SubDomainList/\' );" title="">Sub Domains</a>',    
+										  '<a rel="spotlight;" onClick="ayoola.spotLight.showLinkInIFrame( \'' . Ayoola_Application::getUrlPrefix() . '/tools/classplayer/get/object_name/TaxiApp_Service_List/\' );" title="">Service Types</a>',    
 									) 
 							);
 		$list->setKey( $this->getIdColumn() );

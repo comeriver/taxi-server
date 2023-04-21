@@ -108,21 +108,30 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                 }
             }
 
-            //var_export( $values );
-            $this->setViewContent( '<h3 class="pc-notify-info">Select Service Options</h3>', true );
-
-            $this->setViewContent( '<p>
+            $bookingDetails = '<p>
             <br>
             <b>Pick-up Address</b>: <br>' . $values['passenger_location']['name'] .  ' - ' . $values['passenger_location']['address'] .  '<br><br>
-            <b>Delivery Address</b>: <br>' . $values['destination_location']['name'] .  ' - ' . $values['destination_location']['address'] .  '
-            </p>' );
+            <b>Delivery Address</b>: <br>' . $values['destination_location']['name'] .  ' - ' . $values['destination_location']['address'] .  ' <br><br>
+            <b>Service Type</b>: ' . ( @$serviceType['service_name'] ? : 'Default Service' ) .  '
+            </p>';
+
 
             if( ! $instantRates )
             {
-                $this->setViewContent( '<p>Our team will call you in a bit to provide you with a quote</p>',  );
+                $this->setViewContent( '<h3 class="pc-notify-info">Booking Initiated</h3>', true );
+
+                $this->setViewContent( '<br><br><p>Our team will call you in a bit to provide you with a quote. Check below for your booking details.</p>',  );
+
+                $this->setViewContent( $bookingDetails );
+    
             }
             else
             {
+
+                $this->setViewContent( '<h3 class="pc-notify-info">Select Service Options</h3>', true );
+
+                $this->setViewContent( $bookingDetails );
+    
                 
                 $serviceOptions = self::calcRateOptions( $bookingInfo + $values );
     
@@ -153,7 +162,15 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
                     $this->setViewContent( $html );
     
                 }
-    
+                else
+                {
+                    $this->setViewContent( '<h3 class="pc-notify-info">Booking Initiated</h3>', true );
+
+                    $this->setViewContent( '<br><br><p>Our team will call you in a bit to provide you with a quote. Check below for your booking details.</p>',  );
+                    
+                    $this->setViewContent( $bookingDetails );
+
+                }
             }
         
 			//	Notify Admin

@@ -101,7 +101,7 @@ class TaxiApp_Booking_Manual extends TaxiApp_Booking_Creator
             {
                 if( $serviceType = TaxiApp_Service::getInstance()->selectOne( null, array( 'service_id' => $values['service_id'] ) ) )
                 {
-                    if( in_array( 'no_instant_rates', $serviceType['service_options'] ) )
+                    if( is_array( $serviceType['service_options'] ) && in_array( 'no_instant_rates', $serviceType['service_options'] ) )
                     {
                         $instantRates = false;
                     }
